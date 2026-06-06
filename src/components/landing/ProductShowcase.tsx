@@ -15,11 +15,13 @@ export default function ProductShowcase() {
 
           <div className="order-1 space-y-6 lg:order-2">
             <div>
-              <h3 className="text-2xl font-extrabold text-ink">Campus reels</h3>
+              <h3 className="text-2xl font-extrabold text-ink">Campus Reels</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                From faculty events to hostel hangouts, campus reels capture student life in
-                vertical video. Like, comment, and share what is trending at your university,
-                or post your own clips for classmates to discover.
+                Every campus has its own culture, stories, trends, and unforgettable moments.
+                Campus Reels is where students capture and share what university life actually
+                looks like, from events and campus activities to hostel experiences, student
+                talents, and viral moments. Watch, create, and share short videos that bring
+                your campus culture to life.
               </p>
             </div>
           </div>
@@ -28,11 +30,13 @@ export default function ProductShowcase() {
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-extrabold text-ink">Student marketplace</h3>
+              <h3 className="text-2xl font-extrabold text-ink">Student Marketplace</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                Need a hostel space, textbook, laptop, or thrifted fit? The LinkMyCampus
-                marketplace connects you with verified students buying and selling on your
-                campus. No sketchy DMs, just real listings from people at your university.
+                Looking for a hostel, apartment, roommate, gadget, services, thrifted fashion,
+                foodstuff, or any student essential? The LinkMyCampus Marketplace helps you
+                discover trusted listings from verified students, vendors, and businesses
+                around your campus. Buy, sell, and connect within your university community
+                — all in one place, built specifically for university life.
               </p>
             </div>
           </div>

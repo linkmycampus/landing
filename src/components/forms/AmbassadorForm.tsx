@@ -65,7 +65,7 @@ export default function AmbassadorForm() {
           name="email"
           type="email"
           required
-          placeholder="your@university.edu"
+          placeholder="you@email.com"
           className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-cta focus:ring-2 focus:ring-cta/20"
         />
       </div>
@@ -126,20 +126,41 @@ export default function AmbassadorForm() {
       </div>
 
       <div>
-        <label htmlFor="reach" className="mb-1.5 block text-sm font-medium text-ink">
-          Estimated campus reach
+        <label htmlFor="studentType" className="mb-1.5 block text-sm font-medium text-ink">
+          What best describes you as a student?
         </label>
         <select
-          id="reach"
-          name="reach"
+          id="studentType"
+          name="studentType"
           required
           className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-cta focus:ring-2 focus:ring-cta/20"
         >
           <option value="">Select one</option>
-          <option value="50">Up to 50 students</option>
-          <option value="200">50–200 students</option>
-          <option value="500">200–500 students</option>
-          <option value="500+">500+ students</option>
+          <option value="content-creator">Content Creator</option>
+          <option value="influencer">Influencer</option>
+          <option value="pr">PR</option>
+          <option value="socialite">Socialite</option>
+          <option value="lifestyle-enthusiast">Lifestyle Enthusiast</option>
+          <option value="others">Others (kindly write)</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="ambassadorRole" className="mb-1.5 block text-sm font-medium text-ink">
+          Ambassador Role
+        </label>
+        <select
+          id="ambassadorRole"
+          name="ambassadorRole"
+          required
+          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-cta focus:ring-2 focus:ring-cta/20"
+        >
+          <option value="">Select one</option>
+          <option value="recruitment">Recruitment Ambassador</option>
+          <option value="content">Content Ambassador</option>
+          <option value="community">Community Ambassador</option>
+          <option value="event">Event Ambassador</option>
+          <option value="campus-lead">Campus Lead/Coordinator</option>
         </select>
       </div>
 

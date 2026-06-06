@@ -27,8 +27,9 @@ export default function FeaturesSection() {
       <div className="marketing-container">
         <SectionHeader
           animate
-          title="One app for campus life"
-          body="LinkMyCampus brings together the social, shopping, and community tools university students use every day. Catch up on your campus feed, jump into faculty and hostel groups, watch reels from classmates, list or find deals on the student marketplace, and post anonymously when you have something to say without putting your name on it. Built for verified students, designed for how campus life actually works."
+          title="Everything Students Need, In One Place."
+          subtitle="Campus life is already complicated"
+          body="Students shouldn't have to switch between WhatsApp groups for campus updates, Twitter and WhatsApp TVs for campus news, random marketplaces to buy and sell, and different apps just to find opportunities. LinkMyCampus brings campus life together into one verified student network."
         />
 
         <div className="mt-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-14">

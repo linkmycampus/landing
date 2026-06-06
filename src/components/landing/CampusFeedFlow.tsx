@@ -6,32 +6,39 @@ const ROTATE_MS = 5000;
 
 export const feedFlowSteps = [
   {
-    label: 'Campus feed',
+    label: 'Campus Feeds',
     description:
-      'See what students at your university are talking about right now. Campus posts, hot takes on lectures, hostel updates, and event buzz from people who actually go to your school.',
+      'Your campus has a story unfolding every day. The Campus Feed is where students share updates, start conversations, discover opportunities, discuss campus issues, celebrate wins, and stay informed about what matters most. It\u2019s the fastest way to understand what\u2019s happening across your university, all from students who are living it.',
     image: images.appFeed,
     alt: 'LinkMyCampus campus feed for university students',
   },
   {
-    label: 'Campus reels',
+    label: 'Campus Reels',
     description:
-      'Short-form video made for student life. Watch campus trends, faculty moments, and hostel vibes from students on your university, then share your own.',
+      'Every campus has its own culture, stories, trends, and unforgettable moments. Campus Reels is where students capture and share what university life actually looks like\u2014from events and campus activities to hostel experiences, student talents, and viral moments. Watch, create, and share short videos that bring your campus culture to life.',
     image: images.appReels,
     alt: 'Campus reels on LinkMyCampus student app',
   },
   {
-    label: 'Student groups',
+    label: 'Campus Groups',
     description:
-      'Faculty chats, hostel groups, course study circles, and student orgs. No random strangers, just verified students from your campus in one place.',
+      'Find your people and build meaningful connections within your university. Join faculty communities, hostel groups, study circles, student organizations, interest-based communities, and campus networks where students come together to learn, collaborate, share opportunities, and support one another. Ask questions, share resources, stay informed, and build relationships with students who are walking the same journey as you.',
     image: images.appGroups,
     alt: 'University student groups on LinkMyCampus',
   },
   {
-    label: 'Anonymous posting',
+    label: 'Anonymous Posting',
     description:
-      'Got something to say but do not want your name on it? Post anonymously on your campus feed, then switch back to your visible profile anytime.',
+      'Sometimes the questions you want to ask are the hardest to say out loud. University life comes with questions, opinions, challenges, and experiences that students don\u2019t always feel comfortable sharing publicly. Anonymous Posting allows you to participate in honest conversations, seek advice, discuss sensitive topics, and share your perspective without attaching your name to it. Because sometimes the most important conversations happen when people feel safe enough to be real.',
     image: images.appCreatePost,
     alt: 'Anonymous posting on LinkMyCampus',
+  },
+  {
+    label: 'Student Marketplace',
+    description:
+      'Looking for a hostel, apartment, roommate, gadget, services, thrifted fashion, foodstuff, or any student essential? The LinkMyCampus Marketplace helps you discover trusted listings from verified students, vendors, and businesses around your campus. Buy, sell, and connect within your university community \u2014 all in one place, built specifically for university life.',
+    image: images.appMarketplace,
+    alt: 'Student marketplace on LinkMyCampus',
   },
 ] as const;
 
@@ -128,7 +135,7 @@ export default function CampusFeedFlow() {
         body="LinkMyCampus brings your campus feed, faculty and hostel groups, short-form reels, and a student marketplace into one verified university network. Scroll what classmates are posting, join conversations that actually matter to your school, buy and sell with verified students, and post anonymously when you want your opinion without your name on it. No random strangers, no generic social noise, just real campus life in one place."
       />
 
-      <div className="feed-card-stack relative mt-10 flex items-end gap-3 overflow-x-auto overflow-y-visible pb-6 pt-6 snap-x snap-mandatory md:mt-14 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:pb-8 md:pt-8">
+      <div className="feed-card-stack relative mt-10 flex items-end gap-3 overflow-x-auto overflow-y-visible pb-6 pt-6 snap-x snap-mandatory md:mt-14 md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:pb-8 md:pt-8">
         {steps.map((step, index) => {
           const isActive = active === index;
           const isHovered = hovered === index;

@@ -33,7 +33,7 @@ const ApplyModal: React.FC<ApplyModalProps> = ({ isOpen, onClose }) => {
             <div className="check-icon">
               <Check size={12} strokeWidth={2.5} aria-hidden />
             </div>
-            <span>You have a valid university email address for campus verification</span>
+            <span>You have a valid email address for account verification</span>
           </div>
           <div className="apply-check">
             <div className="check-icon">
@@ -48,8 +48,8 @@ const ApplyModal: React.FC<ApplyModalProps> = ({ isOpen, onClose }) => {
           <input type="text" className="form-input" placeholder="Your full name" />
         </div>
         <div className="form-group">
-          <label className="form-label">University Email</label>
-          <input type="email" className="form-input" placeholder="you@student.oau.edu.ng" />
+          <label className="form-label">Email</label>
+          <input type="email" className="form-input" placeholder="you@email.com" />
         </div>
         <div className="form-group">
           <label className="form-label">Department / Faculty</label>

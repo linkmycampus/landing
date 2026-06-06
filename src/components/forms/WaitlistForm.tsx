@@ -45,14 +45,28 @@ export default function WaitlistForm() {
 
       <div>
         <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink">
-          University email
+          Email
         </label>
         <input
           id="email"
           name="email"
           type="email"
           required
-          placeholder="you@university.edu"
+          placeholder="you@email.com"
+          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="whatsapp" className="mb-1.5 block text-sm font-medium text-ink">
+          WhatsApp number
+        </label>
+        <input
+          id="whatsapp"
+          name="whatsapp"
+          type="tel"
+          required
+          placeholder="+234 …"
           className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
         />
       </div>
@@ -107,9 +121,12 @@ export default function WaitlistForm() {
           name="interest"
           className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-cta focus:ring-2 focus:ring-cta/20"
         >
-          <option value="anonymous">Anonymous posting</option>
-          <option value="groups">Groups</option>
+          <option value="campus-feeds">Campus Feeds</option>
+          <option value="anonymous">Anonymous Posting</option>
+          <option value="marketplace">Student Marketplace</option>
           <option value="reels">Reels</option>
+          <option value="groups">Campus Groups</option>
+          <option value="search">Search</option>
           <option value="all">Everything</option>
         </select>
       </div>

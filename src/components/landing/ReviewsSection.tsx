@@ -3,41 +3,41 @@ import SectionHeader from './SectionHeader';
 
 const featured = {
   quote:
-    'Finally an app that gets student life. I can post anonymously about campus stuff, find hostel listings on the marketplace, and join my faculty group without juggling five different apps.',
-  name: 'University student',
-  handle: '@early_tester',
+    'I found out about my faculty tutorial, and another department event all in the same place. That\'s exactly how campus information should work.',
+  name: 'David Adebayo',
+  handle: '300L Mechanical Engineering',
 };
 
 const cards = [
   {
-    quote: 'The marketplace alone is worth it. Sold my old textbooks to someone in my faculty same day.',
-    handle: '@sci_student',
-    followers: 'Faculty of Science',
+    quote: 'Most times the person you need is just one department away, but you don\'t know how to find them. I like that I can actually discover people in my school beyond my department.',
+    handle: 'Maryam Bello',
+    followers: '200L Mass Communication',
   },
   {
-    quote: 'Campus reels from people I actually know hit different from random TikToks.',
-    handle: '@campus_creator',
-    followers: 'Campus creator',
+    quote: 'If this was available when I first gained admission, it would\'ve saved me weeks of asking random people where to get accommodation, and other essentials.',
+    handle: 'Chinedu Okeke',
+    followers: '400L Economics Department',
   },
   {
-    quote: 'Anonymous for the honest takes, visible profile when my student org needs me.',
-    handle: '@union_volunteer',
-    followers: 'Student org',
+    quote: 'The anonymous feature is probably what I use most. There are many personal questions I want to ask but I don\'t want to be judge by it.',
+    handle: 'Abdulrahman Yusuf',
+    followers: '200L Computer Science',
   },
   {
-    quote: 'Hostel group chat on here beats the WhatsApp chaos we used to have.',
-    handle: '@hostel_rep',
-    followers: 'Block A',
+    quote: 'I spend too much time jumping between WhatsApp groups, TVs Status and pages, just to stay informed. Having everything in one place makes so much sense now.',
+    handle: 'Favour Nwankwo',
+    followers: '100L Law',
   },
   {
-    quote: 'Knowing only verified students are on here makes the marketplace feel way safer.',
-    handle: '@safety_first',
-    followers: 'Verified student',
+    quote: 'Buying from verified students and businesses feels safer than sending money to random people from social media.',
+    handle: 'Samuel Adeyemi',
+    followers: '500L Pharmacy',
   },
   {
-    quote: 'Feed, groups, marketplace, reels. Everything I need as a student in one app.',
-    handle: '@waitlist_day1',
-    followers: 'Waitlist',
+    quote: 'The reels is my favourite because they\'re about people and events I know, not strangers from the other side of the world.',
+    handle: 'Precious Eze',
+    followers: '300L Microbiology',
   },
 ];
 
@@ -46,8 +46,7 @@ export default function ReviewsSection() {
     <section id="reviews" className="border-t border-border bg-surface py-20 md:py-28">
       <div className="marketing-container">
         <SectionHeader
-          title="What students are saying"
-          subtitle="From early waitlist conversations"
+          title="Early Users Feedback"
           body="Early waitlist students are excited about a campus app with anonymous posting, student groups, reels, and a marketplace built for university life."
         />
 
