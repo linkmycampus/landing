@@ -6,10 +6,9 @@ import SiteFooter from '../components/SiteFooter';
 
 const navLinks = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/#about' },
-  { label: 'How it works', to: '/#how-it-works' },
-  { label: 'Reviews', to: '/#reviews' },
-  { label: 'FAQ', to: '/#faq' },
+  { label: 'Benefits', to: '/#benefits' },
+  { label: 'Ambassador', to: '/ambassador' },
+  { label: 'FAQs', to: '/#faq' },
 ];
 
 export default function MarketingLayout() {
@@ -19,38 +18,37 @@ export default function MarketingLayout() {
 
   const handleNavClick = () => setMenuOpen(false);
 
+  const resolveHref = (to: string) => {
+    if (to.startsWith('/#')) return isHome ? to.slice(1) : to;
+    return to;
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur-md">
-        <div className="marketing-container flex h-16 items-center justify-between gap-4">
+    <div className="flex min-h-screen flex-col bg-page">
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-page/85 backdrop-blur-md">
+        <div className="marketing-container flex h-[4.25rem] items-center justify-between gap-4">
           <Link to="/" className="flex shrink-0 items-center gap-2" onClick={handleNavClick}>
             <img src={images.logo} alt="LinkMyCampus" className="h-8 w-auto md:h-9" />
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.label}
-                href={link.to.startsWith('/#') ? (isHome ? link.to.slice(1) : link.to) : link.to}
-                className="text-sm font-medium text-muted transition-colors hover:text-ink"
+                href={resolveHref(link.to)}
+                className="text-sm font-medium text-ink/70 transition-colors hover:text-brand"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="hidden items-center gap-3 md:flex">
-            <Link
-              to="/ambassador"
-              className="rounded-full px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-surface"
-            >
-              Ambassadors
-            </Link>
+          <div className="hidden items-center md:flex">
             <Link
               to="/waitlist"
-              className="rounded-full bg-cta px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cta-hover"
+              className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft"
             >
-              Join waitlist
+              Get started
             </Link>
           </div>
 
@@ -70,22 +68,19 @@ export default function MarketingLayout() {
               {navLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={link.to.startsWith('/#') ? (isHome ? link.to.slice(1) : link.to) : link.to}
+                  href={resolveHref(link.to)}
                   className="text-sm font-medium text-ink"
                   onClick={handleNavClick}
                 >
                   {link.label}
                 </a>
               ))}
-              <Link to="/ambassador" className="text-sm font-medium text-ink" onClick={handleNavClick}>
-                Ambassadors
-              </Link>
               <Link
                 to="/waitlist"
-                className="mt-2 rounded-full bg-cta py-3 text-center text-sm font-semibold text-white"
+                className="mt-2 rounded-full bg-navy py-3 text-center text-sm font-semibold text-white"
                 onClick={handleNavClick}
               >
-                Join waitlist
+                Get started
               </Link>
             </nav>
           </div>
