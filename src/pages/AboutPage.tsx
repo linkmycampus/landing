@@ -23,6 +23,16 @@ const legalLinks = [
     caption: 'What we expect from every member',
     to: '/community-standards',
   },
+  {
+    title: 'Delete account',
+    caption: 'Request account and data deletion',
+    to: '/delete-account',
+  },
+  {
+    title: 'Delete data',
+    caption: 'Request data deletion without closing your account',
+    to: '/delete-data',
+  },
 ];
 
 export default function AboutPage() {

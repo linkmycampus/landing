@@ -9,6 +9,7 @@ const footerLinks = [
   { label: 'About', to: '/about' },
   { label: 'Privacy', to: '/privacy' },
   { label: 'Terms', to: '/terms' },
+  { label: 'Delete account', to: '/delete-account' },
 ];
 
 const socialLinks = [

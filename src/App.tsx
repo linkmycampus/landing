@@ -7,6 +7,8 @@ import AboutPage from './pages/AboutPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import CommunityStandardsPage from './pages/CommunityStandardsPage';
+import DeleteAccountPage from './pages/DeleteAccountPage';
+import DeleteDataPage from './pages/DeleteDataPage';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="privacy" element={<PrivacyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="community-standards" element={<CommunityStandardsPage />} />
+          <Route path="delete-account" element={<DeleteAccountPage />} />
+          <Route path="delete-data" element={<DeleteDataPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -20,6 +20,17 @@ export default function PrivacyPage() {
         You can update privacy settings, turn contact discovery off, and request account
         deactivation or deletion in the app.
       </p>
+      <p>
+        Web requests:{' '}
+        <a href="/delete-account" className="font-semibold text-brand hover:underline">
+          Delete account
+        </a>
+        {' · '}
+        <a href="/delete-data" className="font-semibold text-brand hover:underline">
+          Delete data
+        </a>
+        .
+      </p>
     </LegalPageLayout>
   );
 }
