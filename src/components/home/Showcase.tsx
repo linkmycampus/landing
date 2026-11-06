@@ -106,7 +106,7 @@ export default function Showcase() {
         </div>
 
         {/* Mobile: feature chips above the screen */}
-        <div ref={chipsRef} className="mt-8 flex gap-2 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
+        <div ref={chipsRef} className="mt-8 flex gap-2 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden [&>:first-child]:ml-auto [&>:last-child]:mr-auto">
           {FEATURES.map((f, k) => (
             <button
               key={f.title}

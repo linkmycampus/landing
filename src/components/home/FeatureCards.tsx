@@ -22,14 +22,14 @@ export default function FeatureCards() {
   return (
     <section id="features" aria-labelledby="features-title" className="py-[clamp(72px,10vw,144px)]">
       <div className="wrap">
-        <Reveal className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+        <Reveal className="flex flex-col justify-between gap-6 text-center lg:flex-row lg:items-end lg:text-left">
           <div>
             <h2 id="features-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
               Made for every
               <span className="block text-faint">corner of campus.</span>
             </h2>
           </div>
-          <p className="t-body max-w-[26em] text-[16px] lg:text-right">
+          <p className="t-body mx-auto max-w-[26em] text-[16px] lg:mx-0 lg:text-right">
             Everything that happens at your school, from freshers’ week to final exams.
           </p>
         </Reveal>
