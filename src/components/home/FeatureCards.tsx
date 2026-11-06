@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import studentsWalking from '../../assets/photos/students-walking.jpg';
+import studentsTree from '../../assets/photos/students-tree.jpg';
 import studentsBench from '../../assets/photos/students-bench.jpg';
-import libraryStudy from '../../assets/photos/library-study.jpg';
+import friendsHijab from '../../assets/photos/friends-hijab.jpg';
+import auditorium from '../../assets/photos/auditorium.jpg';
 import groupSelfie from '../../assets/photos/group-selfie.jpg';
-import libraryHeart from '../../assets/photos/library-heart.jpg';
 import { Reveal } from './primitives';
 
 /* After the reference's "Private events for unique experience": a row of photo cards,
    the one you point at opens up. */
 const cards = [
-  { title: 'Feed', sub: 'Trending reels, gist and posts from people at your school.', src: studentsWalking },
+  { title: 'Feed', sub: 'Trending reels, gist and posts from people at your school.', src: studentsTree },
   { title: 'Chat', sub: 'Message coursemates and friends, with delivered and seen receipts.', src: studentsBench },
-  { title: 'Pages', sub: 'Join communities like OAU Confessions, or Pages for your department, hostel or club.', src: libraryStudy },
-  { title: 'Events', sub: 'Parties, conferences and quizzes. See who’s going and register in a tap.', src: groupSelfie },
-  { title: 'Reels', sub: 'Short videos made on campus. See what your school is laughing at.', src: libraryHeart },
+  { title: 'Pages', sub: 'Join communities like OAU Confessions, or Pages for your department, hostel or club.', src: friendsHijab },
+  { title: 'Events', sub: 'Parties, conferences and quizzes. See who’s going and register in a tap.', src: auditorium },
+  { title: 'Reels', sub: 'Short videos made on campus. See what your school is laughing at.', src: groupSelfie },
 ];
 
 export default function FeatureCards() {

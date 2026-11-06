@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Pause, Play } from 'lucide-react';
 import studentsWalking from '../../assets/photos/students-walking.jpg';
 import libraryStudy from '../../assets/photos/library-study.jpg';
-import studentsBench from '../../assets/photos/students-bench.jpg';
-import groupSelfie from '../../assets/photos/group-selfie.jpg';
+import campusCheer from '../../assets/photos/campus-cheer.jpg';
+import graduationCaps from '../../assets/photos/graduation-caps.jpg';
 
 /*
   "Our story", played like a short film: a campus photo drifts behind the words while the
@@ -38,7 +38,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     title: 'Why we exist',
-    photo: studentsBench,
+    photo: campusCheer,
     beats: [
       { text: 'You shouldn’t have to know the right people to experience campus.' },
       { text: 'Or be in ten WhatsApp groups to know what’s happening.' },
@@ -48,7 +48,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     title: 'Live more',
-    photo: groupSelfie,
+    photo: graduationCaps,
     beats: [
       { text: 'University isn’t just the classes you attend.' },
       { text: 'It’s the people you meet, and the stories you eventually tell.' },

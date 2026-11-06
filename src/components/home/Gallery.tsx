@@ -1,19 +1,15 @@
-import studentsWalking from '../../assets/photos/students-walking.jpg';
-import groupSelfie from '../../assets/photos/group-selfie.jpg';
-import libraryStudy from '../../assets/photos/library-study.jpg';
-import libraryHeart from '../../assets/photos/library-heart.jpg';
-import studentsTree from '../../assets/photos/students-tree.jpg';
 import foodTruck from '../../assets/photos/food-truck.jpg';
+import graduatesGarden from '../../assets/photos/graduates-garden.jpg';
+import campusCrowd from '../../assets/photos/campus-crowd.jpg';
+import campusPharmacy from '../../assets/photos/campus-pharmacy.jpg';
 import { Reveal } from './primitives';
 
 /* After the reference's "Club moments gallery": a loose collage with small captions. */
 const shots = [
-  { src: studentsWalking, cap: 'Between lectures', ratio: 'aspect-[3/4]' },
-  { src: groupSelfie, cap: 'Freshers’ week', ratio: 'aspect-[4/3]' },
-  { src: libraryHeart, cap: 'Library nights', ratio: 'aspect-square' },
-  { src: studentsTree, cap: 'Study break', ratio: 'aspect-[4/3]' },
+  { src: campusCrowd, cap: 'Matriculation day', ratio: 'aspect-[4/3]' },
+  { src: graduatesGarden, cap: 'Convocation', ratio: 'aspect-[3/4]' },
   { src: foodTruck, cap: 'Campus eats', ratio: 'aspect-[4/5]' },
-  { src: libraryStudy, cap: 'Group project', ratio: 'aspect-[16/10]' },
+  { src: campusPharmacy, cap: 'Around campus', ratio: 'aspect-[4/3]' },
 ];
 
 export default function Gallery() {
@@ -26,7 +22,7 @@ export default function Gallery() {
           </h2>
         </Reveal>
 
-        <div className="mt-[clamp(40px,6vw,72px)] columns-2 gap-4 md:columns-3">
+        <div className="mt-[clamp(40px,6vw,72px)] columns-2 gap-4 lg:columns-4">
           {shots.map((s, i) => (
             <Reveal key={s.cap} delay={(i % 3) * 90} className="mb-4 break-inside-avoid">
               <figure className={`unveil relative overflow-hidden rounded-[20px] ${s.ratio}`}>

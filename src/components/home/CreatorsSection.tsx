@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import lecture from '../../assets/photos/lecture.jpg';
 import libraryHeart from '../../assets/photos/library-heart.jpg';
-import studentsBench from '../../assets/photos/students-bench.jpg';
+import lectureChat from '../../assets/photos/lecture-chat.jpg';
 import { Reveal, SecHead } from './primitives';
 
 const paths = [
@@ -24,7 +24,7 @@ const paths = [
     body: 'Campus magazines, blogs and media houses: distribute your stories through the network.',
     cta: 'Partner with us',
     to: '/waitlist',
-    src: studentsBench,
+    src: lectureChat,
   },
 ];
 

@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import studentsWalking from '../../assets/photos/students-walking.jpg';
-import lecture from '../../assets/photos/lecture.jpg';
-import libraryStudy from '../../assets/photos/library-study.jpg';
-import groupSelfie from '../../assets/photos/group-selfie.jpg';
+import lectureListening from '../../assets/photos/lecture-listening.jpg';
+import studentLaptop from '../../assets/photos/student-laptop.jpg';
+import studentsCorridor from '../../assets/photos/students-corridor.jpg';
+import studentVolunteers from '../../assets/photos/student-volunteers.jpg';
 import { CountUp, Reveal } from './primitives';
 
 /* Option 4 — photo cards: each number in white over a softly darkened campus photo. */
 const stats = [
-  { n: '328', label: 'Universities', src: studentsWalking },
-  { n: '203', label: 'Polytechnics', src: lecture },
-  { n: '355', label: 'Colleges', src: libraryStudy },
-  { n: '2.5M+', label: 'Students in Nigeria', src: groupSelfie },
+  { n: '328', label: 'Universities', src: lectureListening },
+  { n: '203', label: 'Polytechnics', src: studentLaptop },
+  { n: '355', label: 'Colleges', src: studentsCorridor },
+  { n: '2.5M+', label: 'Students in Nigeria', src: studentVolunteers },
 ];
 
 export default function Intro() {

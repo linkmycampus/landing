@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import studentsBench from '../../assets/photos/students-bench.jpg';
+import studyGroup from '../../assets/photos/study-group.jpg';
 import { Reveal } from './primitives';
 
 /* After the reference's closing "Get in touch" block and dark contact band. */
@@ -33,7 +33,7 @@ export default function ClosingCTA() {
             </dl>
           </div>
           <figure className="unveil overflow-hidden rounded-[20px]">
-            <img src={studentsBench} alt="Students sharing a laugh on campus" className="aspect-[16/10] w-full object-cover" loading="lazy" />
+            <img src={studyGroup} alt="Students sharing a laugh on campus" className="aspect-[16/10] w-full object-cover" loading="lazy" />
           </figure>
         </Reveal>
 
