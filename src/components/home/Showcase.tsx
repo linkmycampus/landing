@@ -90,7 +90,7 @@ export default function Showcase() {
     >
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 id="showcase-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.03em]">
+          <h2 id="showcase-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
             Your school, <span className="text-faint">in your pocket.</span>
           </h2>
           <p className="lede mx-auto mt-4">Everything happening on campus, in one app.</p>

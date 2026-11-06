@@ -46,7 +46,7 @@ export default function Intro() {
                 />
                 <span className="absolute inset-0 bg-gradient-to-t from-[#170b3d]/90 via-[#170b3d]/35 to-transparent" aria-hidden />
                 <figcaption className="absolute inset-x-5 bottom-5">
-                  <span className="block font-display text-[clamp(2.25rem,1.6rem+2.2vw,3.5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums">
+                  <span className="block font-display text-[clamp(2.25rem,1.6rem+2.2vw,3.5rem)] font-semibold leading-none tracking-[-0.015em] tabular-nums">
                     <CountUp value={s.n} />
                   </span>
                   <span className="mt-2 block text-[14px] font-medium text-white/80">{s.label}</span>

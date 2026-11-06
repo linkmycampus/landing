@@ -64,7 +64,7 @@ export default function SiteFooter() {
           <div className="grid grid-cols-2 gap-x-12 gap-y-10 sm:grid-cols-3 lg:gap-x-20">
             {columns.map((col) => (
               <div key={col.title}>
-                <h3 className="text-[20px] font-normal tracking-[-0.03em] text-ink">{col.title}</h3>
+                <h3 className="text-[20px] font-normal tracking-[-0.015em] text-ink">{col.title}</h3>
                 <ul className="mt-3 space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.label}>

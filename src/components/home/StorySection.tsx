@@ -102,7 +102,7 @@ export default function StorySection() {
     <section ref={ref} id="story" aria-labelledby="story-title" className="pb-[clamp(72px,10vw,144px)]">
       <div className="wrap">
         <div className="mb-[clamp(28px,4vw,48px)] flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <h2 id="story-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.03em]">
+          <h2 id="story-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
             Our story
             <span className="block text-faint">Welcome to Planet Campus.</span>
           </h2>
@@ -152,7 +152,7 @@ export default function StorySection() {
           <div className="absolute inset-0 flex items-center justify-center px-[clamp(20px,6vw,120px)] text-center" aria-live="polite">
             <p
               key={i}
-              className={`story-line font-display font-semibold tracking-[-0.03em] [text-wrap:balance] ${
+              className={`story-line font-display font-semibold tracking-[-0.015em] [text-wrap:balance] ${
                 beat.big
                   ? 'text-[clamp(2.25rem,1.4rem+3.4vw,4.75rem)] leading-[1.02]'
                   : 'text-[clamp(1.5rem,1.05rem+1.9vw,3rem)] leading-[1.12]'

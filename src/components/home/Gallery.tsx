@@ -17,7 +17,7 @@ export default function Gallery() {
     <section id="moments" aria-labelledby="gallery-title" className="py-[clamp(56px,8vw,112px)]">
       <div className="wrap">
         <Reveal className="text-center">
-          <h2 id="gallery-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.75rem)] font-semibold leading-[1.04] tracking-[-0.03em]">
+          <h2 id="gallery-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.75rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
             Campus moments <span className="text-faint">gallery</span>
           </h2>
         </Reveal>

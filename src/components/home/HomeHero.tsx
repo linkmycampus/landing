@@ -134,7 +134,7 @@ export default function HomeHero() {
               className="hero-fade mt-[clamp(20px,2.4vw,32px)] flex flex-col-reverse items-start gap-[18px] sm:flex-row sm:items-center sm:gap-5"
               style={{ animationDelay: '560ms' }}
             >
-              <Link to="/waitlist" className="btn btn-light">
+              <Link to="/waitlist" className="btn btn-light ring-glow">
                 Join the waitlist
               </Link>
               <div className="grid gap-1">

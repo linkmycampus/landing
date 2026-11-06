@@ -24,7 +24,7 @@ export default function FeatureCards() {
       <div className="wrap">
         <Reveal className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
-            <h2 id="features-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.03em]">
+            <h2 id="features-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
               Made for every
               <span className="block text-faint">corner of campus.</span>
             </h2>

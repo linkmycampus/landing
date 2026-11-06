@@ -164,7 +164,7 @@ export default function MarketingLayout() {
           <div className="flex items-center gap-2 justify-self-end">
             <Link
               to="/waitlist"
-              className={`nav-cta ${overHero ? '!bg-white !text-brand hover:!bg-[#ececf0]' : ''}`}
+              className={`nav-cta ring-glow ${overHero ? '!bg-white !text-brand hover:!bg-[#ececf0]' : ''}`}
             >
               Join the waitlist
             </Link>
@@ -222,7 +222,7 @@ export default function MarketingLayout() {
                 </Link>
               </li>
             </ol>
-            <Link to="/waitlist" onClick={close} className="btn mt-8 w-full">
+            <Link to="/waitlist" onClick={close} className="btn ring-glow mt-8 w-full">
               Join the waitlist
             </Link>
             <p className="mt-4 text-center text-[13px] text-muted">Open to all students in Nigeria.</p>

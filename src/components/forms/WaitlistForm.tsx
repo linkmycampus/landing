@@ -67,7 +67,7 @@ export default function WaitlistForm() {
       <button
         type="submit"
         disabled={loading}
-        className="hero-fade btn btn-lg w-full disabled:opacity-60"
+        className="hero-fade btn btn-lg ring-glow w-full disabled:opacity-60"
         style={{ animationDelay: '620ms' }}
       >
         {loading ? 'Joining…' : 'Join the waitlist'}
