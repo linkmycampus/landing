@@ -62,7 +62,7 @@ const BEATS = CHAPTERS.flatMap((c, ci) => c.beats.map((b) => ({ ...b, chapter: c
 const BEAT_MS = 3400;
 /* Background music for the story. Put the file at public/audio/story.mp3 (royalty-free). */
 const MUSIC_SRC = '/audio/story.mp3';
-const MUSIC_VOLUME = 0.35;
+const MUSIC_VOLUME = 0.2;
 
 function prefersReducedMotion() {
   try {
