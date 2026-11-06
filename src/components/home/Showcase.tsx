@@ -8,11 +8,11 @@ import { images } from '../../assets/images';
   their own; hover or tap one to show it.
 */
 const FEATURES = [
-  { title: 'Campus feed', body: 'Trending reels, posts and gist from your school.', src: images.appFeed, icon: Newspaper, side: 'left' },
-  { title: 'Chat', body: 'Message coursemates, with delivered and seen receipts.', src: images.appChat, icon: MessageCircle, side: 'left' },
-  { title: 'Create a post', body: 'Photos, tags, sounds, and who can see it.', src: images.appCreatePost, icon: PenSquare, side: 'left' },
-  { title: 'Pages', body: 'Communities for your department, hostel or club.', src: images.appPage, icon: Users, side: 'right' },
-  { title: 'Events', body: 'See who’s going and register in a tap.', src: images.appEvent, icon: Calendar, side: 'right' },
+  { title: 'Campus feed', body: 'Trending reels, posts and gist from your school.', src: images.appFeed, ratio: 1.964, icon: Newspaper, side: 'left' },
+  { title: 'Chat', body: 'Message coursemates, with delivered and seen receipts.', src: images.appChat, ratio: 1.958, icon: MessageCircle, side: 'left' },
+  { title: 'Create a post', body: 'Photos, tags, sounds, and who can see it.', src: images.appCreatePost, ratio: 2.103, icon: PenSquare, side: 'left' },
+  { title: 'Pages', body: 'Communities for your department, hostel or club.', src: images.appPage, ratio: 2.474, icon: Users, side: 'right' },
+  { title: 'Events', body: 'See who’s going and register in a tap.', src: images.appEvent, ratio: 2.2, icon: Calendar, side: 'right' },
 ] as const;
 
 const STEP_MS = 3800;
@@ -120,12 +120,15 @@ export default function Showcase() {
           </div>
 
           {/* The screen */}
-          <div className="relative mx-auto w-[min(78vw,320px)] lg:w-[min(300px,calc(64vh/1.96))]">
+          <div className="relative mx-auto w-[min(74vw,300px)] lg:w-[min(320px,calc(78vh/2.474))]">
             <div
               className="pointer-events-none absolute -inset-[30%] rounded-full bg-[radial-gradient(closest-side,rgba(107,79,216,0.32),transparent)] blur-2xl"
               aria-hidden
             />
-            <div className="relative aspect-[1/1.96] overflow-hidden rounded-[34px] bg-white shadow-[0_50px_100px_-35px_rgba(30,12,80,0.5),0_0_0_1px_rgba(0,0,0,0.06)]">
+            <div
+              className="relative overflow-hidden rounded-[34px] bg-white shadow-[0_50px_100px_-35px_rgba(30,12,80,0.5),0_0_0_1px_rgba(0,0,0,0.06)] transition-[padding-top] duration-700 ease-[var(--ease-out)]"
+              style={{ paddingTop: `${FEATURES[active].ratio * 100}%` }}
+            >
               {FEATURES.map((f, k) => (
                 <img
                   key={f.title}

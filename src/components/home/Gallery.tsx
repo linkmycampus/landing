@@ -6,8 +6,8 @@ import { Reveal } from './primitives';
 
 /* After the reference's "Club moments gallery": a loose collage with small captions. */
 const shots = [
-  { src: campusCrowd, cap: 'Matriculation day', ratio: 'aspect-[4/3]' },
-  { src: graduatesGarden, cap: 'Convocation', ratio: 'aspect-[3/4]' },
+  { src: campusCrowd, cap: 'Campus gathering', ratio: 'aspect-[4/3]' },
+  { src: graduatesGarden, cap: 'Graduation day', ratio: 'aspect-[3/4]' },
   { src: foodTruck, cap: 'Campus eats', ratio: 'aspect-[4/5]' },
   { src: campusPharmacy, cap: 'Around campus', ratio: 'aspect-[4/3]' },
 ];
