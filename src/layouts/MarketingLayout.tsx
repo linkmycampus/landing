@@ -112,7 +112,7 @@ export default function MarketingLayout() {
       <header
         className={`sticky top-0 z-50 h-14 transition-colors duration-[240ms] ${
           scrolled
-            ? 'bg-white/[0.78] shadow-[inset_0_-1px_0_var(--separator)] backdrop-blur-[20px] backdrop-saturate-[1.8]'
+            ? 'bg-white/[0.82] backdrop-blur-[20px] backdrop-saturate-[1.8]'
             : 'bg-white/0'
         }`}
       >
