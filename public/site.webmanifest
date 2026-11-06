@@ -1,0 +1,10 @@
+{
+  "name": "LinkMyCampus",
+  "short_name": "LinkMyCampus",
+  "description": "Planet Campus: the social app for Nigerian students.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#35167f",
+  "icons": [{ "src": "/favicon.png", "sizes": "128x128", "type": "image/png" }]
+}

@@ -3,11 +3,7 @@ import { Plus } from 'lucide-react';
 const faqs = [
   {
     q: 'Who can join LinkMyCampus?',
-    a: 'LinkMyCampus is built for university and college students. When you sign up you pick your campus, so your feed, Pages and events are full of people from your school.',
-  },
-  {
-    q: 'Is it free?',
-    a: 'Yes. LinkMyCampus is free for students. Join the waitlist and we’ll let you know when your campus is live.',
+    a: 'LinkMyCampus is open to students at all 328 universities, 203 polytechnics and 355 colleges in Nigeria. When you sign up you pick your campus, so your feed, Pages and events are full of people from your school.',
   },
   {
     q: 'Is the ambassador or creator program a job?',
@@ -22,6 +18,21 @@ const faqs = [
 export default function HomeFAQ() {
   return (
     <section id="faq" aria-labelledby="faq-title" className="sec">
+      {/* FAQ structured data so Google can show these questions in search results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a },
+            })),
+          }),
+        }}
+      />
       <div className="wrap split">
         <div className="lg:sticky lg:top-24 lg:self-start">
           <h2 id="faq-title" className="h2">

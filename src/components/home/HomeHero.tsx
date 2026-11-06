@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../../assets/images';
+import StoreBadges from '../StoreBadges';
 
 type Screen = { src: string; label: string };
 
@@ -46,7 +47,7 @@ function ScreenTile({ screen }: { screen: Screen }) {
 function Reel({ playing }: { playing: boolean }) {
   return (
     <div
-      className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,#000_12%,#000_88%,transparent)]"
+      className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,#000_12%,#000_72%,transparent_92%)]"
       aria-hidden
     >
       <div className="absolute left-1/2 top-1/2 flex w-[150%] gap-[clamp(12px,1.6vw,22px)] [transform:translate(-50%,-50%)_rotate(-10deg)_skewX(4deg)] sm:w-[110%] lg:left-[72%] lg:w-[56%]">
@@ -118,10 +119,10 @@ export default function HomeHero() {
         </div>
 
         {/* Copy, bottom-left */}
-        <div className="wrap absolute inset-x-0 bottom-[clamp(72px,7vw,110px)] z-[5] text-white">
-          <div className="lg:max-w-[50%]">
+        <div className="absolute inset-x-0 bottom-[clamp(88px,8vw,130px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
+          <div className="lg:max-w-[64%]">
             <h1 id="hero-title" className="hero-title [text-shadow:0_1px_30px_rgba(0,0,0,0.15)]">
-              {['Your whole', 'campus,', 'in one app.'].map((line, i) => (
+              {['Your whole campus,', 'in one app.'].map((line, i) => (
                 <span key={line} className="hero-line">
                   <span className="hero-line-in" style={{ animationDelay: `${150 + i * 110}ms` }}>
                     {line}
@@ -138,9 +139,10 @@ export default function HomeHero() {
               </Link>
               <div className="grid gap-1">
                 <p className="text-[15px] font-medium">Feed, chat, Pages, events and reels.</p>
-                <p className="text-[13px] text-white/70">Free for students at 35 campuses.</p>
+                <p className="text-[13px] text-white/70">Open to all students in Nigeria.</p>
               </div>
             </div>
+            <StoreBadges className="hero-fade mt-5" style={{ animationDelay: "680ms" }} />
           </div>
         </div>
       </div>

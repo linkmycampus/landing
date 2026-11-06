@@ -1,24 +1,22 @@
 import { Link } from 'react-router-dom';
 import { CountUp, Reveal } from './primitives';
 
-/* Right under the clouds: a two-tone statement on the left, the numbers on the right. */
+/* Right under the clouds: a two-tone statement, then the numbers, each sliding in from a side. */
 const stats = [
-  { n: '35', label: 'Universities and colleges' },
-  { n: '1.4k+', label: 'Students created content last month' },
-  { n: '6', label: 'Campus media magazines' },
+  { n: '328', label: 'Universities' },
+  { n: '203', label: 'Polytechnics' },
+  { n: '355', label: 'Colleges' },
+  { n: '2.5M+', label: 'University students in Nigeria' },
 ];
 
 export default function Intro() {
   return (
-    <section id="about" aria-labelledby="intro-title" className="relative z-[1] pb-[clamp(72px,10vw,144px)] pt-[clamp(16px,3vw,40px)]">
-      <div className="wrap grid gap-14 lg:grid-cols-[minmax(0,7.4fr)_minmax(0,4.6fr)] lg:gap-[clamp(48px,7vw,128px)]">
+    <section id="about" aria-labelledby="intro-title" className="relative z-[1] pb-[clamp(72px,10vw,144px)]">
+      <div className="wrap grid items-center gap-12 lg:grid-cols-[minmax(0,6.6fr)_minmax(0,5.4fr)] lg:gap-[clamp(48px,6vw,112px)]">
         <Reveal>
-          <span className="text-[20px] leading-none text-ink" aria-hidden>
-            ✦
-          </span>
           <h2
             id="intro-title"
-            className="mt-6 max-w-[24em] text-[clamp(1.5rem,1.1rem+1.3vw,2.25rem)] font-semibold leading-[1.22] tracking-[-0.02em]"
+            className="max-w-[24em] text-[clamp(1.5rem,1.1rem+1.3vw,2.25rem)] font-semibold leading-[1.22] tracking-[-0.02em]"
           >
             Built by students, for campus life. We bring your school online in one place:
             <span className="text-faint">
@@ -29,27 +27,24 @@ export default function Intro() {
           </h2>
           <Link
             to="/about"
-            className="mt-9 inline-flex h-11 items-center rounded-full bg-ink px-6 text-[14px] font-medium text-white transition-colors hover:bg-brand"
+            className="btn-ring mt-9"
           >
             More about us
           </Link>
         </Reveal>
 
-        <Reveal delay={120}>
-          <dl>
-            {stats.map((s, i) => (
-              <div
-                key={s.label}
-                className={`flex items-center justify-between gap-6 py-6 ${i > 0 ? 'border-t border-border' : ''}`}
-              >
-                <dt className="font-display text-[clamp(2.75rem,2rem+2.4vw,4rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums">
+        <div className="grid grid-cols-2 gap-x-[clamp(20px,3vw,40px)] gap-y-[clamp(28px,3.5vw,44px)]" role="list" aria-label="LinkMyCampus across Nigeria">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 110} className={i % 2 === 0 ? 'from-left' : 'from-right'}>
+              <div role="listitem" className="border-t-2 border-brand pt-5">
+                <p className="font-display text-[clamp(2.5rem,1.8rem+2.6vw,4rem)] font-semibold leading-none tracking-[-0.03em] text-brand tabular-nums">
                   <CountUp value={s.n} />
-                </dt>
-                <dd className="max-w-[12em] text-right text-[13px] leading-5 text-muted">{s.label}</dd>
+                </p>
+                <p className="mt-3 text-[15px] font-medium leading-5 text-ink">{s.label}</p>
               </div>
-            ))}
-          </dl>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

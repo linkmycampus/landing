@@ -9,7 +9,7 @@ export default function WaitlistPage() {
       description="Be first in when LinkMyCampus goes live at your school."
       photo={groupSelfie}
       photoAlt="Students taking a group selfie on campus"
-      note="Free for students."
+      note="Open to all students at every university, polytechnic and college in Nigeria."
     >
       <WaitlistForm />
     </FormPageLayout>

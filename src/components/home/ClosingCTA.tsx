@@ -48,7 +48,7 @@ export default function ClosingCTA() {
           />
           <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
             <p className="text-[clamp(1.75rem,1.2rem+1.8vw,2.75rem)] font-display font-semibold leading-tight tracking-[-0.03em]">
-              Free for students. <span className="text-white/60">Join the waitlist.</span>
+              Open to all students. <span className="text-white/60">Join the waitlist.</span>
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/waitlist" className="btn btn-light">
@@ -56,7 +56,7 @@ export default function ClosingCTA() {
               </Link>
               <Link
                 to="/ambassador"
-                className="btn bg-white/10 shadow-[inset_0_0_0_0.5px_rgba(255,255,255,0.3)] hover:bg-white/20"
+                className="btn-ring btn-ring-dark h-12"
               >
                 Become an ambassador
               </Link>

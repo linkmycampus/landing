@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 import lecture from '../../assets/photos/lecture.jpg';
 import libraryHeart from '../../assets/photos/library-heart.jpg';
 import studentsBench from '../../assets/photos/students-bench.jpg';
@@ -58,13 +57,7 @@ export default function CreatorsSection() {
               <span className="flex flex-1 flex-col px-4 pb-4 pt-5">
                 <h3 className="t-title">{title}</h3>
                 <p className="t-body mt-2 flex-1">{body}</p>
-                <span className="mt-8 inline-flex items-center gap-1 text-[15px] font-medium text-brand">
-                  {cta}
-                  <ArrowUpRight
-                    size={16}
-                    className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </span>
+                <span className="btn-ring mt-8 w-fit group-hover:bg-brand group-hover:text-white">{cta}</span>
               </span>
             </Link>
           ))}

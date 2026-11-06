@@ -3,8 +3,10 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { images } from '../assets/images';
 import SiteFooter from '../components/SiteFooter';
+import { applyPageMeta } from '../config/seo';
 
 const navLinks = [
+  { label: 'Our story', to: '/#story' },
   { label: 'The app', to: '/#app' },
   { label: 'Features', to: '/#features' },
   { label: 'Campus', to: '/#moments' },
@@ -18,6 +20,11 @@ export default function MarketingLayout() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
   const { hash } = useLocation();
+
+  // Title, description and social tags for the current page.
+  useEffect(() => {
+    applyPageMeta(pathname);
+  }, [pathname]);
 
   // Open every page at the top (unless the link points at a section, e.g. /#faq).
   useEffect(() => {
@@ -220,7 +227,7 @@ export default function MarketingLayout() {
             <Link to="/waitlist" onClick={close} className="btn mt-8 w-full">
               Join the waitlist
             </Link>
-            <p className="mt-4 text-center text-[13px] text-muted">Free for students.</p>
+            <p className="mt-4 text-center text-[13px] text-muted">Open to all students in Nigeria.</p>
           </nav>
         </div>
       )}

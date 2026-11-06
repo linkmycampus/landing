@@ -5,7 +5,7 @@ type FormPageLayoutProps = {
   description: string;
   photo: string;
   photoAlt: string;
-  /** Small line under the photo, e.g. "Free for students at 35 campuses." */
+  /** Small line under the photo, e.g. "Open to all students in Nigeria." */
   note?: string;
   children: React.ReactNode;
 };

@@ -137,7 +137,7 @@ export function PhoneFrame({
   );
 }
 
-/** Counts up to a value like "35" or "1.4k+" the first time it scrolls into view. */
+/** Counts up to a value like "328" or "2.5M+" the first time it scrolls into view. */
 export function CountUp({ value }: { value: string }) {
   const m = value.match(/^([\d.]+)(.*)$/);
   const target = m ? parseFloat(m[1]) : 0;
