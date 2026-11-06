@@ -85,7 +85,7 @@ export default function HomeHero() {
   return (
     /* -mt-14 slides the hero up under the sticky 56px header so the two blend */
     <section id="top" aria-labelledby="hero-title" className="-mt-14">
-      <div className="relative isolate h-[clamp(720px,calc(100svh+40px),1000px)] overflow-hidden">
+      <div className="relative isolate h-[clamp(840px,calc(100svh+160px),1140px)] overflow-hidden">
         {/* The window: brand purple */}
         <div
           className="absolute inset-0 -z-10"
@@ -119,7 +119,7 @@ export default function HomeHero() {
         </div>
 
         {/* Copy, bottom-left */}
-        <div className="absolute inset-x-0 bottom-[clamp(210px,28vh,330px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
+        <div className="absolute inset-x-0 bottom-[clamp(330px,calc(28vh+120px),450px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
           <div className="lg:max-w-[64%]">
             <h1 id="hero-title" className="hero-title [text-shadow:0_1px_30px_rgba(0,0,0,0.15)]">
               {['Your whole campus,', 'in one app.'].map((line, i) => (
