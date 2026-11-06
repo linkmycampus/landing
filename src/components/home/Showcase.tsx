@@ -84,7 +84,7 @@ export default function Showcase() {
       ref={ref}
       id="app"
       aria-labelledby="showcase-title"
-      className="overflow-hidden bg-surface py-[clamp(72px,10vw,144px)]"
+      className="overflow-hidden py-[clamp(72px,10vw,144px)]"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >

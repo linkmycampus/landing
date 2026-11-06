@@ -29,7 +29,7 @@ export default function Intro() {
               actually see on campus.
             </span>
           </h2>
-          <Link to="/about" className="btn-ring shrink-0">
+          <Link to="/about" className="btn-ring w-fit shrink-0">
             More about us
           </Link>
         </Reveal>
