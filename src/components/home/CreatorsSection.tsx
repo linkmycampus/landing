@@ -28,7 +28,6 @@ const paths = [
   },
 ];
 
-const perks = ['Official recognition', 'Network distribution', 'Early access', 'Dedicated support'];
 
 export default function CreatorsSection() {
   return (
@@ -61,17 +60,6 @@ export default function CreatorsSection() {
               </span>
             </Link>
           ))}
-        </Reveal>
-
-        <Reveal className="mt-12 border-t border-border pt-10">
-          <p className="t-title">Every path includes</p>
-          <ul className="mt-4 grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:grid-cols-4">
-            {perks.map((p) => (
-              <li key={p} className="text-[15px] leading-6 text-muted">
-                {p}
-              </li>
-            ))}
-          </ul>
         </Reveal>
       </div>
     </section>
