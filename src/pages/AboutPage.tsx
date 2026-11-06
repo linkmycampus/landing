@@ -40,10 +40,7 @@ function BrandStory() {
     <section aria-labelledby="our-story" className="pb-[clamp(56px,8vw,112px)] pt-[clamp(32px,5vw,72px)]">
       <div className="wrap split items-start">
         <div className="lg:sticky lg:top-24">
-          <Link to="/" className="meta transition-colors hover:text-ink">
-            ← Home
-          </Link>
-          <h1 className="display mt-10 max-w-[11em]">
+          <h1 className="display max-w-[11em]">
             Planet Campus
             <span className="block text-faint">The place where campus life happens.</span>
           </h1>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 
 type FormPageLayoutProps = {
   title: string;
@@ -15,10 +14,7 @@ export default function FormPageLayout({ title, description, photo, photoAlt, no
     <section className="pb-[clamp(72px,10vw,144px)] pt-[clamp(24px,4vw,56px)]">
       <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-[clamp(32px,5vw,88px)]">
         <div className="lg:sticky lg:top-24">
-          <Link to="/" className="hero-fade meta inline-block transition-colors hover:text-ink">
-            ← Home
-          </Link>
-          <h1 className="display mt-8 max-w-[11em]">
+          <h1 className="display max-w-[11em]">
             <span className="hero-line">
               <span className="hero-line-in" style={{ animationDelay: '80ms' }}>
                 {title}

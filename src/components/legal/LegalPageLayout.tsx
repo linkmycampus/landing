@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 type LegalPageLayoutProps = {
   title: string;
@@ -20,10 +20,7 @@ export default function LegalPageLayout({ title, updated, children }: LegalPageL
     <section className="pb-[clamp(72px,10vw,144px)] pt-[clamp(32px,5vw,72px)]">
       <div className="wrap split items-start">
         <aside className="lg:sticky lg:top-24">
-          <Link to="/about" className="meta transition-colors hover:text-ink">
-            ← About
-          </Link>
-          <h1 className="display mt-10 max-w-[11em]">{title}</h1>
+          <h1 className="display max-w-[11em]">{title}</h1>
           <p className="meta mt-4">Updated {updated}</p>
 
           <nav aria-label="Legal pages" className="mt-10 hidden max-w-xs border-t border-border lg:block">
