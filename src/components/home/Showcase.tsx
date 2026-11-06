@@ -15,7 +15,7 @@ const FEATURES = [
   { title: 'Events', body: 'See who’s going and register in a tap.', src: images.appEvent, ratio: 2.2, icon: Calendar, side: 'right' },
 ] as const;
 
-const STEP_MS = 3800;
+const STEP_MS = 5200; // slow, calm pace
 
 function prefersReducedMotion() {
   try {
@@ -28,6 +28,15 @@ function prefersReducedMotion() {
 export default function Showcase() {
   const [active, setActive] = useState(0);
   const [hovering, setHovering] = useState(false);
+  const chipsRef = useRef<HTMLDivElement>(null);
+
+  // On phones, slide the tab row so the active tab is always in view.
+  useEffect(() => {
+    const row = chipsRef.current;
+    const chip = row?.children[active] as HTMLElement | undefined;
+    if (!row || !chip || row.scrollWidth <= row.clientWidth) return;
+    row.scrollTo({ left: chip.offsetLeft - row.offsetLeft - (row.clientWidth - chip.offsetWidth) / 2, behavior: 'smooth' });
+  }, [active]);
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const reduce = useRef(prefersReducedMotion());
@@ -85,8 +94,8 @@ export default function Showcase() {
       id="app"
       aria-labelledby="showcase-title"
       className="overflow-hidden py-[clamp(72px,10vw,144px)]"
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+      onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && setHovering(false)}
     >
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
@@ -97,7 +106,7 @@ export default function Showcase() {
         </div>
 
         {/* Mobile: feature chips above the screen */}
-        <div className="mt-8 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
+        <div ref={chipsRef} className="mt-8 flex gap-2 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
           {FEATURES.map((f, k) => (
             <button
               key={f.title}

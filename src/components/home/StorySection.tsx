@@ -59,7 +59,7 @@ const CHAPTERS: Chapter[] = [
 ];
 
 const BEATS = CHAPTERS.flatMap((c, ci) => c.beats.map((b) => ({ ...b, chapter: ci })));
-const BEAT_MS = 3400;
+const BEAT_MS = 4200;
 /* Background music for the story. Put the file at public/audio/story.mp3 (royalty-free). */
 const MUSIC_SRC = '/audio/story.mp3';
 const MUSIC_VOLUME = 0.2;
