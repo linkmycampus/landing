@@ -201,14 +201,13 @@ export default function MarketingLayout() {
           </div>
           <nav className="wrap mt-2" aria-label="Mobile">
             <ol>
-              {navLinks.map((link, i) => (
+              {navLinks.map((link) => (
                 <li key={link.label} className="border-b border-border">
                   <a
                     href={resolveHref(link.to)}
                     onClick={close}
                     className="flex items-baseline gap-4 py-4 font-display text-[26px] font-semibold tracking-[-0.025em]"
                   >
-                    <span className="meta">{String(i + 1).padStart(2, '0')}</span>
                     {link.label}
                   </a>
                 </li>
@@ -219,7 +218,6 @@ export default function MarketingLayout() {
                   onClick={close}
                   className="flex items-baseline gap-4 py-4 font-display text-[26px] font-semibold tracking-[-0.025em]"
                 >
-                  <span className="meta">06</span>
                   Ambassadors
                 </Link>
               </li>
