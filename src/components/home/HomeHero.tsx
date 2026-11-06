@@ -119,7 +119,7 @@ export default function HomeHero() {
         </div>
 
         {/* Copy, bottom-left */}
-        <div className="absolute inset-x-0 bottom-[clamp(330px,calc(28vh+120px),450px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
+        <div className="absolute inset-x-0 bottom-[clamp(220px,calc(14vh+110px),260px)] lg:bottom-[clamp(330px,calc(28vh+120px),450px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
           <div className="lg:max-w-[64%]">
             <h1 id="hero-title" className="hero-title [text-shadow:0_1px_30px_rgba(0,0,0,0.15)]">
               {['Your whole campus,', 'in one app.'].map((line, i) => (
