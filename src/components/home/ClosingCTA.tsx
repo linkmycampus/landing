@@ -8,18 +8,18 @@ export default function ClosingCTA() {
     <section aria-labelledby="cta-title" className="pb-[clamp(72px,10vw,144px)]">
       <div className="wrap">
         <Reveal className="grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-[clamp(32px,5vw,96px)]">
-          <div>
+          <div className="text-center lg:text-left">
             <h2 id="cta-title" className="text-[clamp(2.25rem,1.5rem+2.4vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.015em]">
               Your campus
               <span className="block text-faint">is waiting.</span>
             </h2>
-            <dl className="mt-8 grid max-w-sm gap-2">
+            <dl className="mx-auto mt-8 grid max-w-sm gap-2 text-left lg:mx-0">
               {[
                 ['Email', 'hello@linkmycampus.com', 'mailto:hello@linkmycampus.com'],
                 ['Support', 'support@linkmycampus.com', 'mailto:support@linkmycampus.com'],
                 ['Ambassadors', 'Apply to represent your school', '/ambassador'],
               ].map(([k, v, href]) => (
-                <div key={k} className="flex items-baseline justify-between gap-4 rounded-[14px] bg-surface px-4 py-3.5">
+                <div key={k} className="flex items-baseline justify-between gap-4 rounded-[14px] bg-[#fbfbfc] px-4 py-3.5 shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
                   <dt className="text-[14px] text-muted">{k}</dt>
                   <dd className="text-right text-[14px]">
                     {href.startsWith('/') ? (

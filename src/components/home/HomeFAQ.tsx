@@ -50,12 +50,12 @@ export default function HomeFAQ() {
         }}
       />
       <div className="wrap split">
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="text-center lg:sticky lg:top-24 lg:self-start lg:text-left">
           <h2 id="faq-title" className="h2">
             Questions,
             <span className="t2">answered plainly.</span>
           </h2>
-          <p className="lede mt-5 max-w-[26em]">
+          <p className="lede mx-auto mt-5 max-w-[26em] lg:mx-0">
             Anything else, email{' '}
             <a href="mailto:hello@linkmycampus.com" className="inline-link">
               hello@linkmycampus.com
@@ -68,7 +68,7 @@ export default function HomeFAQ() {
           {faqs.map((f) => (
             <details
               key={f.q}
-              className="faq-q group mb-2 rounded-[18px] bg-surface px-5"
+              className="faq-q group mb-2 rounded-[18px] bg-[#fbfbfc] px-5 shadow-[0_0_0_1px_rgba(0,0,0,0.05)]"
             >
               <summary className="flex min-h-16 cursor-pointer items-center justify-between gap-6 rounded-[6px] py-[18px]">
                 <span className="t-title">{f.q}</span>
