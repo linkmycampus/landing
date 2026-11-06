@@ -1,108 +1,100 @@
 import { Link } from 'react-router-dom';
 import { images } from '../assets/images';
 
-const footerLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'Benefits', to: '/#benefits' },
-  { label: 'Ambassador', to: '/ambassador' },
-  { label: 'FAQs', to: '/#faq' },
-  { label: 'About', to: '/about' },
-  { label: 'Privacy', to: '/privacy' },
-  { label: 'Terms', to: '/terms' },
-  { label: 'Delete account', to: '/delete-account' },
+/* Footer layout after plud.app: logo left, three link columns right, and an
+   oversized fading wordmark that bleeds off the bottom of the page. */
+
+const columns = [
+  {
+    title: 'Explore',
+    links: [
+      { label: 'The app', to: '/#app' },
+      { label: 'Features', to: '/#features' },
+      { label: 'Creators', to: '/#creators' },
+      { label: 'Ambassadors', to: '/ambassador' },
+      { label: 'Waitlist', to: '/waitlist' },
+    ],
+  },
+  {
+    title: 'Help',
+    links: [
+      { label: 'Email', to: 'mailto:hello@linkmycampus.com' },
+      { label: 'FAQs', to: '/#faq' },
+      { label: 'About', to: '/about' },
+      { label: 'Support', to: 'mailto:support@linkmycampus.com' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy', to: '/privacy' },
+      { label: 'Terms', to: '/terms' },
+      { label: 'Community standards', to: '/community-standards' },
+      { label: 'Delete account', to: '/delete-account' },
+      { label: 'Delete data', to: '/delete-data' },
+    ],
+  },
 ];
 
-const socialLinks = [
-  {
-    label: 'X (Twitter)',
-    href: '#',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden>
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Instagram',
-    href: '#',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-4 w-4" aria-hidden>
-        <rect x="2" y="2" width="20" height="20" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-  {
-    label: 'LinkedIn',
-    href: '#',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden>
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.126 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-];
+function FooterLink({ label, to }: { label: string; to: string }) {
+  const cls =
+    'text-[17px] tracking-[-0.02em] text-muted transition-colors duration-150 hover:text-brand md:text-[18px]';
+  if (to.startsWith('/#') || to.startsWith('mailto:')) {
+    return (
+      <a href={to} className={cls}>
+        {label}
+      </a>
+    );
+  }
+  return (
+    <Link to={to} className={cls}>
+      {label}
+    </Link>
+  );
+}
 
 export default function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t border-border bg-page pb-10 pt-8">
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 select-none text-center text-[12vw] font-extrabold leading-none tracking-tight text-brand/[0.06]"
-        aria-hidden
-      >
-        LinkMyCampus
-      </div>
+    <footer className="relative overflow-hidden border-t border-border pt-16">
+      <div className="wrap relative z-10">
+        <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
+          <Link to="/" aria-label="LinkMyCampus home" className="inline-flex h-fit w-fit items-center">
+            <img src={images.logo} alt="LinkMyCampus" className="h-9 w-auto md:h-11" />
+          </Link>
 
-      <div className="marketing-container relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <Link to="/" className="shrink-0">
-          <img src={images.logo} alt="LinkMyCampus" className="h-8 w-auto" />
-        </Link>
-
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          {footerLinks.map((link) =>
-            link.to.startsWith('/#') || link.to === '/' ? (
-              <a
-                key={link.label}
-                href={link.to}
-                className="text-sm font-medium text-muted transition-colors hover:text-brand"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                to={link.to}
-                className="text-sm font-medium text-muted transition-colors hover:text-brand"
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <div className="flex gap-2">
-            {socialLinks.map(({ icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-muted transition-colors hover:border-brand hover:text-brand"
-              >
-                {icon}
-              </a>
+          <div className="grid grid-cols-2 gap-x-12 gap-y-10 sm:grid-cols-3 lg:gap-x-20">
+            {columns.map((col) => (
+              <div key={col.title}>
+                <h3 className="text-[20px] font-normal tracking-[-0.03em] text-ink">{col.title}</h3>
+                <ul className="mt-3 space-y-2.5">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <FooterLink {...l} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
-          <span className="hidden text-sm text-muted lg:inline">
-            All rights reserved {new Date().getFullYear()}
-          </span>
         </div>
+
+        <p className="mt-14 text-[13px] text-muted">
+          © {new Date().getFullYear()} LinkMyCampus. All rights reserved.
+        </p>
       </div>
 
-      <p className="marketing-container relative mt-6 text-sm text-muted lg:hidden">
-        All rights reserved {new Date().getFullYear()}
-      </p>
+      {/* Oversized wordmark, fading out and cut by the page edge */}
+      <div aria-hidden="true" className="wrap pointer-events-none flex select-none justify-center">
+        <span
+          className="mt-6 -mb-[0.3em] whitespace-nowrap bg-clip-text pe-[0.06em] text-[min(15.8vw,218px)] font-medium leading-[1.11] tracking-[-0.07em] text-transparent"
+          style={{
+            backgroundImage:
+              'linear-gradient(180deg, #35167f 8%, rgba(107, 79, 216, 0.14) 60%, rgba(107, 79, 216, 0) 100%)',
+          }}
+        >
+          LinkMyCampus
+        </span>
+      </div>
     </footer>
   );
 }

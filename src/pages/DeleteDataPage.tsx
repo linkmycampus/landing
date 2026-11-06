@@ -12,8 +12,8 @@ export default function DeleteDataPage() {
         <strong>LinkMyCampus</strong> <em>without</em> deleting your entire account.
       </p>
 
-      <h2 className="!mt-8 text-xl font-bold text-ink">How to request data deletion</h2>
-      <ol className="list-decimal space-y-3 pl-5">
+      <h2>How to request data deletion</h2>
+      <ol>
         <li>
           Open the <strong>LinkMyCampus</strong> app and sign in.
         </li>
@@ -26,7 +26,7 @@ export default function DeleteDataPage() {
         </li>
         <li>
           To request broader data deletion while keeping your account, email{' '}
-          <a href="mailto:support@linkmycampus.com" className="font-semibold text-brand hover:underline">
+          <a href="mailto:support@linkmycampus.com">
             support@linkmycampus.com
           </a>{' '}
           from your account email with the subject line{' '}
@@ -35,23 +35,23 @@ export default function DeleteDataPage() {
         </li>
       </ol>
 
-      <h2 className="!mt-8 text-xl font-bold text-ink">What we can delete</h2>
-      <ul className="list-disc space-y-2 pl-5">
+      <h2>What we can delete</h2>
+      <ul>
         <li>Selected content you posted (posts, comments, and similar)</li>
         <li>Optional profile details you ask us to clear</li>
         <li>Certain app activity and preference data linked to your account</li>
       </ul>
 
-      <h2 className="!mt-8 text-xl font-bold text-ink">What we may keep</h2>
+      <h2>What we may keep</h2>
       <p>If you keep your account, we typically retain data required for the product to work, such as:</p>
-      <ul className="list-disc space-y-2 pl-5">
+      <ul>
         <li>Core account credentials and identifiers needed to sign you in</li>
         <li>Campus verification details needed for network access</li>
         <li>Security, safety, and abuse-prevention records where necessary</li>
         <li>Data we must retain to comply with law</li>
       </ul>
 
-      <h2 className="!mt-8 text-xl font-bold text-ink">Retention period</h2>
+      <h2>Retention period</h2>
       <p>
         After we verify a data-deletion request, we aim to remove eligible data within{' '}
         <strong>30 days</strong>. Backup copies may persist for up to <strong>90 days</strong>{' '}
@@ -60,7 +60,7 @@ export default function DeleteDataPage() {
 
       <p>
         Want to delete the whole account instead? See{' '}
-        <a href="/delete-account" className="font-semibold text-brand hover:underline">
+        <a href="/delete-account">
           Request account deletion
         </a>
         .

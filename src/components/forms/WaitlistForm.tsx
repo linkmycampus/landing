@@ -1,5 +1,11 @@
 import { useState, type FormEvent } from 'react';
 
+const fields = [
+  { id: 'fullName', label: 'Full name', type: 'text', placeholder: 'Your full name', autoComplete: 'name' },
+  { id: 'email', label: 'Email', type: 'email', placeholder: 'you@email.com', autoComplete: 'email' },
+  { id: 'university', label: 'University', type: 'text', placeholder: 'e.g. University of Lagos', autoComplete: 'organization' },
+] as const;
+
 export default function WaitlistForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -15,13 +21,15 @@ export default function WaitlistForm() {
 
   if (submitted) {
     return (
-      <div className="text-center py-6">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-light text-brand text-2xl">
+      <div className="py-10 text-center" aria-live="polite">
+        <div className="pop mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand text-2xl text-white">
           ✓
         </div>
-        <h2 className="mt-4 text-xl font-bold text-ink">You&apos;re on the list</h2>
-        <p className="mt-2 text-sm text-muted">
-          We&apos;ll email you when LinkMyCampus opens at your university. Share with friends on campus.
+        <h2 className="hero-fade mt-6 font-display text-[24px] font-semibold tracking-[-0.02em] text-ink" style={{ animationDelay: '150ms' }}>
+          You’re on the list
+        </h2>
+        <p className="hero-fade t-body mx-auto mt-2 max-w-sm" style={{ animationDelay: '250ms' }}>
+          We’ll email you when LinkMyCampus opens at your university.
         </p>
       </div>
     );
@@ -30,125 +38,40 @@ export default function WaitlistForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="fullName" className="mb-1.5 block text-sm font-medium text-ink">
-          Full name
-        </label>
-        <input
-          id="fullName"
-          name="fullName"
-          type="text"
-          required
-          placeholder="Your full name"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
-        />
+        <h2 className="font-display text-[22px] font-semibold tracking-[-0.02em]">Get early access</h2>
+        <p className="t-body mt-1">Takes less than a minute.</p>
       </div>
 
-      <div>
-        <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          placeholder="you@email.com"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
-        />
-      </div>
+      {fields.map((f, i) => (
+        <div key={f.id} className="hero-fade" style={{ animationDelay: `${320 + i * 70}ms` }}>
+          <label htmlFor={f.id} className="field-label">
+            {f.label}
+          </label>
+          <input
+            id={f.id}
+            name={f.id}
+            type={f.type}
+            required
+            placeholder={f.placeholder}
+            autoComplete={f.autoComplete}
+            className="field"
+          />
+        </div>
+      ))}
 
-      <div>
-        <label htmlFor="whatsapp" className="mb-1.5 block text-sm font-medium text-ink">
-          WhatsApp number
-        </label>
-        <input
-          id="whatsapp"
-          name="whatsapp"
-          type="tel"
-          required
-          placeholder="+234 …"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="university" className="mb-1.5 block text-sm font-medium text-ink">
-          University
-        </label>
-        <input
-          id="university"
-          name="university"
-          type="text"
-          required
-          placeholder="e.g. University of Lagos"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="faculty" className="mb-1.5 block text-sm font-medium text-ink">
-          Faculty / Department
-        </label>
-        <input
-          id="faculty"
-          name="faculty"
-          type="text"
-          required
-          placeholder="e.g. Faculty of Science, Computer Science"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="matric" className="mb-1.5 block text-sm font-medium text-ink">
-          Matric number <span className="text-muted font-normal">(optional)</span>
-        </label>
-        <input
-          id="matric"
-          name="matric"
-          type="text"
-          placeholder="For faster verification when we launch"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none transition-shadow focus:border-cta focus:ring-2 focus:ring-cta/20"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="interest" className="mb-1.5 block text-sm font-medium text-ink">
-          What are you most excited about?
-        </label>
-        <select
-          id="interest"
-          name="interest"
-          className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-cta focus:ring-2 focus:ring-cta/20"
-        >
-          <option value="campus-feeds">Campus Feeds</option>
-          <option value="anonymous">Anonymous Posting</option>
-          <option value="marketplace">Student Marketplace</option>
-          <option value="reels">Reels</option>
-          <option value="groups">Campus Groups</option>
-          <option value="search">Search</option>
-          <option value="all">Everything</option>
-        </select>
-      </div>
-
-      <label className="flex items-start gap-3 text-sm text-muted">
-        <input type="checkbox" required className="mt-1 rounded border-border text-cta focus:ring-cta" />
-        <span>
-          I am a current or incoming university student and agree to receive launch updates from LinkMyCampus.
-        </span>
+      <label className="hero-fade flex items-start gap-3 text-[13px] leading-5 text-muted" style={{ animationDelay: '560ms' }}>
+        <input type="checkbox" required className="check" />
+        <span>I’m a university student and I’d like launch updates from LinkMyCampus.</span>
       </label>
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-xl bg-cta py-3.5 text-sm font-semibold text-white transition-colors hover:bg-cta-hover disabled:opacity-60"
+        className="hero-fade btn btn-lg w-full disabled:opacity-60"
+        style={{ animationDelay: '620ms' }}
       >
-        {loading ? 'Submitting…' : 'Join the waitlist'}
+        {loading ? 'Joining…' : 'Join the waitlist'}
       </button>
-
-      <p className="text-center text-xs text-muted">
-        Form storage not connected yet — submissions are simulated locally until you wire a backend.
-      </p>
     </form>
   );
 }

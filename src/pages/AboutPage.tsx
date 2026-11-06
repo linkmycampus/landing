@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import { images } from '../assets/images';
+import { ArrowUpRight } from 'lucide-react';
 
 const metaRows = [
   { label: 'App version', value: '1.0.0' },
@@ -37,50 +36,51 @@ const legalLinks = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-page py-12 md:py-16">
-      <div className="marketing-container max-w-lg">
-        <div className="flex flex-col items-center text-center">
-          <img src={images.logo} alt="" className="h-16 w-16 object-contain" />
-          <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-ink">
+    <section className="pb-[clamp(72px,10vw,144px)] pt-[clamp(32px,5vw,72px)]">
+      <div className="wrap split items-start">
+        <div className="lg:sticky lg:top-24">
+          <Link to="/" className="meta transition-colors hover:text-ink">
+            ← Home
+          </Link>
+          <h1 className="display mt-10 max-w-[11em]">
             LinkMyCampus
+            <span className="block text-faint">The social app for your campus.</span>
           </h1>
-          <span className="mt-3 inline-flex rounded-full bg-brand-light px-3.5 py-1 text-sm font-semibold text-brand">
-            Version 1.0.0
-          </span>
-        </div>
+          <p className="lede mt-5 max-w-[28em]">
+            A campus feed, chat, Pages, events and reels for university students.
+          </p>
 
-        <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-white">
-          {metaRows.map((row, i) => (
-            <div
-              key={row.label}
-              className={`flex items-center justify-between px-5 py-4 ${
-                i < metaRows.length - 1 ? 'border-b border-border' : ''
-              }`}
-            >
-              <span className="text-sm text-muted">{row.label}</span>
-              <span className="text-sm font-semibold text-ink">{row.value}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-white">
-          {legalLinks.map((item, i) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-surface ${
-                i < legalLinks.length - 1 ? 'border-b border-border' : ''
-              }`}
-            >
-              <div>
-                <p className="font-semibold text-ink">{item.title}</p>
-                <p className="mt-0.5 text-sm text-muted">{item.caption}</p>
+          <dl className="mt-10 max-w-md border-t border-border">
+            {metaRows.map((row) => (
+              <div key={row.label} className="flex items-center justify-between border-b border-border py-3.5">
+                <dt className="text-[15px] text-muted">{row.label}</dt>
+                <dd className="font-mono text-[13px] text-ink">{row.value}</dd>
               </div>
-              <ChevronRight size={18} className="shrink-0 text-muted" />
-            </Link>
-          ))}
+            ))}
+          </dl>
+        </div>
+
+        <div>
+          <h2 className="t-title border-b border-ink pb-3.5">Policies and requests</h2>
+          <ul>
+            {legalLinks.map((item) => (
+              <li key={item.to} className="border-b border-border">
+                <Link to={item.to} className="group flex items-center justify-between gap-6 py-5">
+                  <span>
+                    <span className="t-title block">{item.title}</span>
+                    <span className="t-body mt-0.5 block">{item.caption}</span>
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    strokeWidth={1.6}
+                    className="shrink-0 text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

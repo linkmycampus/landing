@@ -22,11 +22,11 @@ export default function PrivacyPage() {
       </p>
       <p>
         Web requests:{' '}
-        <a href="/delete-account" className="font-semibold text-brand hover:underline">
+        <a href="/delete-account">
           Delete account
         </a>
         {' · '}
-        <a href="/delete-data" className="font-semibold text-brand hover:underline">
+        <a href="/delete-data">
           Delete data
         </a>
         .

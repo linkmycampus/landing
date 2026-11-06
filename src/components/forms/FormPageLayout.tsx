@@ -1,32 +1,51 @@
 import { Link } from 'react-router-dom';
 
 type FormPageLayoutProps = {
-  badge: string;
   title: string;
   description: string;
+  photo: string;
+  photoAlt: string;
+  /** Small line under the photo, e.g. "Free for students at 35 campuses." */
+  note?: string;
   children: React.ReactNode;
 };
 
-export default function FormPageLayout({ badge, title, description, children }: FormPageLayoutProps) {
+export default function FormPageLayout({ title, description, photo, photoAlt, note, children }: FormPageLayoutProps) {
   return (
-    <div className="bg-grid min-h-[calc(100vh-4rem)] py-12 md:py-16">
-      <div className="mx-auto max-w-lg px-5 md:px-8">
-        <Link to="/" className="text-sm font-medium text-muted transition-colors hover:text-cta">
-          ← Back to home
-        </Link>
+    <section className="pb-[clamp(72px,10vw,144px)] pt-[clamp(24px,4vw,56px)]">
+      <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-[clamp(32px,5vw,88px)]">
+        <div className="lg:sticky lg:top-24">
+          <Link to="/" className="hero-fade meta inline-block transition-colors hover:text-ink">
+            ← Home
+          </Link>
+          <h1 className="display mt-8 max-w-[11em]">
+            <span className="hero-line">
+              <span className="hero-line-in" style={{ animationDelay: '80ms' }}>
+                {title}
+              </span>
+            </span>
+          </h1>
+          <p className="hero-fade lede mt-4 max-w-[28em]" style={{ animationDelay: '240ms' }}>
+            {description}
+          </p>
 
-        <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-muted">
-          <span className="h-1.5 w-1.5 rounded-full bg-cta" />
-          {badge}
-        </p>
+          <figure
+            className="hero-fade mt-8 hidden overflow-hidden rounded-[24px] lg:block"
+            style={{ animationDelay: '360ms' }}
+          >
+            <img src={photo} alt={photoAlt} className="kenburns aspect-[16/11] w-full object-cover" />
+          </figure>
+          {note && (
+            <p className="hero-fade mt-4 hidden text-[13px] text-muted lg:block" style={{ animationDelay: '420ms' }}>
+              {note}
+            </p>
+          )}
+        </div>
 
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-ink md:text-4xl">{title}</h1>
-        <p className="mt-3 text-muted">{description}</p>
-
-        <div className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-sm md:p-8">
+        <div className="hero-fade card p-6 sm:p-8 md:p-10" style={{ animationDelay: '200ms' }}>
           {children}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
