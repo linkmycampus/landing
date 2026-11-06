@@ -8,7 +8,7 @@ import { images } from '../../assets/images';
   their own; hover or tap one to show it.
 */
 const FEATURES = [
-  { title: 'Campus feed', body: 'Trending reels, posts and gist from your school.', src: images.appFeed, ratio: 1.964, icon: Newspaper, side: 'left' },
+  { title: 'Campus feed', body: 'Trending reels, posts and gist from your school.', src: images.appFeed, ratio: 2.359, icon: Newspaper, side: 'left' },
   { title: 'Chat', body: 'Message coursemates, with delivered and seen receipts.', src: images.appChat, ratio: 1.958, icon: MessageCircle, side: 'left' },
   { title: 'Create a post', body: 'Photos, tags, sounds, and who can see it.', src: images.appCreatePost, ratio: 2.103, icon: PenSquare, side: 'left' },
   { title: 'Pages', body: 'Communities for your department, hostel or club.', src: images.appPage, ratio: 2.474, icon: Users, side: 'right' },
