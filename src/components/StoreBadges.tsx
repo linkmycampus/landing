@@ -35,13 +35,13 @@ function Badge({
   label: string;
 }) {
   const cls =
-    'inline-flex h-[52px] items-center gap-2.5 rounded-[12px] bg-black px-4 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28)] transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#111]';
+    'inline-flex h-12 items-center gap-2.5 rounded-full bg-black pl-4 pr-5 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28)] transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#111]';
   const inner = (
     <>
       {icon}
       <span className="flex flex-col leading-none">
         <span className="text-[10px] font-medium tracking-[0.02em] text-white/80">{top}</span>
-        <span className="mt-1 font-display text-[18px] font-semibold tracking-[-0.01em]">{bottom}</span>
+        <span className="mt-0.5 font-display text-[16px] font-semibold tracking-[-0.01em]">{bottom}</span>
       </span>
     </>
   );
