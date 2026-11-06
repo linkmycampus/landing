@@ -108,7 +108,7 @@ export default function HomeHero() {
 
         {/* Shade: from the left on desktop, from the bottom on phones */}
         <div
-          className="pointer-events-none absolute inset-0 z-[3] bg-[linear-gradient(to_top,rgba(14,6,40,0.95)_0%,rgba(14,6,40,0.7)_38%,rgba(14,6,40,0.1)_70%)] lg:bg-[linear-gradient(to_right,rgba(23,11,61,0.96)_0%,rgba(23,11,61,0.85)_36%,rgba(23,11,61,0)_60%)]"
+          className="pointer-events-none absolute inset-0 z-[3] bg-[linear-gradient(to_top,rgba(14,6,40,0.95)_0%,rgba(14,6,40,0.8)_45%,rgba(14,6,40,0.15)_80%)] lg:bg-[linear-gradient(to_right,rgba(23,11,61,0.96)_0%,rgba(23,11,61,0.85)_36%,rgba(23,11,61,0)_60%)]"
           aria-hidden
         />
 
@@ -119,7 +119,7 @@ export default function HomeHero() {
         </div>
 
         {/* Copy, bottom-left */}
-        <div className="absolute inset-x-0 bottom-[clamp(88px,8vw,130px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
+        <div className="absolute inset-x-0 bottom-[clamp(150px,22vh,280px)] z-[5] px-[var(--gutter)] text-white lg:px-[clamp(24px,3vw,44px)]">
           <div className="lg:max-w-[64%]">
             <h1 id="hero-title" className="hero-title [text-shadow:0_1px_30px_rgba(0,0,0,0.15)]">
               {['Your whole campus,', 'in one app.'].map((line, i) => (

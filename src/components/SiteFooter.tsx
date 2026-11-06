@@ -8,7 +8,6 @@ const columns = [
   {
     title: 'Explore',
     links: [
-      { label: 'The app', to: '/#app' },
       { label: 'Features', to: '/#features' },
       { label: 'Creators', to: '/#creators' },
       { label: 'Ambassadors', to: '/ambassador' },

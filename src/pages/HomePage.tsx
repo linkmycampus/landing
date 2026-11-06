@@ -1,7 +1,6 @@
 import HomeHero from '../components/home/HomeHero';
 import Intro from '../components/home/Intro';
 import StorySection from '../components/home/StorySection';
-import Showcase from '../components/home/Showcase';
 import FeatureCards from '../components/home/FeatureCards';
 import Gallery from '../components/home/Gallery';
 import CreatorsSection from '../components/home/CreatorsSection';
@@ -14,7 +13,6 @@ export default function HomePage() {
       <HomeHero />
       <Intro />
       <StorySection />
-      <Showcase />
       <FeatureCards />
       <Gallery />
       <CreatorsSection />
