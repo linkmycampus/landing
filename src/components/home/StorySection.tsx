@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Pause, Play } from 'lucide-react';
+import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
 import studentsWalking from '../../assets/photos/students-walking.jpg';
 import libraryStudy from '../../assets/photos/library-study.jpg';
 import campusCheer from '../../assets/photos/campus-cheer.jpg';
@@ -60,6 +60,9 @@ const CHAPTERS: Chapter[] = [
 
 const BEATS = CHAPTERS.flatMap((c, ci) => c.beats.map((b) => ({ ...b, chapter: ci })));
 const BEAT_MS = 3400;
+/* Background music for the story. Put the file at public/audio/story.mp3 (royalty-free). */
+const MUSIC_SRC = '/audio/story.mp3';
+const MUSIC_VOLUME = 0.35;
 
 function prefersReducedMotion() {
   try {
@@ -75,6 +78,58 @@ export default function StorySection() {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const reduce = useRef(prefersReducedMotion());
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [soundOn, setSoundOn] = useState(false);
+  const [hasMusic, setHasMusic] = useState(false);
+
+  // Only show the sound button once the music file actually exists.
+  useEffect(() => {
+    let live = true;
+    fetch(MUSIC_SRC, { method: 'HEAD' })
+      .then((r) => {
+        const type = r.headers.get('content-type') || '';
+        if (live && r.ok && type.startsWith('audio')) setHasMusic(true);
+      })
+      .catch(() => {});
+    return () => {
+      live = false;
+    };
+  }, []);
+
+  // Fade the music volume smoothly to a target.
+  const fadeTo = (target: number, ms = 600) => {
+    const a = audioRef.current;
+    if (!a) return;
+    const from = a.volume;
+    const start = performance.now();
+    const step = (t: number) => {
+      const p = Math.min(1, (t - start) / ms);
+      a.volume = from + (target - from) * p;
+      if (p < 1) requestAnimationFrame(step);
+      else if (target === 0) a.pause();
+    };
+    requestAnimationFrame(step);
+  };
+
+  const toggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const a = audioRef.current;
+    if (!a) return;
+    if (soundOn) {
+      setSoundOn(false);
+      fadeTo(0);
+      return;
+    }
+    // Turning sound on restarts the story so music and captions begin together.
+    setI(0);
+    setPlaying(true);
+    a.currentTime = 0;
+    a.volume = 0;
+    a.play().then(() => {
+      setSoundOn(true);
+      fadeTo(MUSIC_VOLUME, 1200);
+    }).catch(() => setHasMusic(false));
+  };
 
   // Start playing the first time the section is on screen; pause when it leaves.
   useEffect(() => {
@@ -97,6 +152,16 @@ export default function StorySection() {
 
   const beat = BEATS[i];
   const running = playing && inView;
+
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a || !soundOn) return;
+    if (running) {
+      a.play().catch(() => {});
+      fadeTo(MUSIC_VOLUME, 500);
+    } else fadeTo(0, 400);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [running]);
 
   return (
     <section ref={ref} id="story" aria-labelledby="story-title" className="pb-[clamp(72px,10vw,144px)]">
@@ -161,6 +226,30 @@ export default function StorySection() {
               {beat.text}
             </p>
           </div>
+
+          <audio
+            ref={audioRef}
+            src={MUSIC_SRC}
+            loop
+            preload="none"
+            onError={() => setHasMusic(false)}
+          />
+
+          {/* Sound toggle, top-right */}
+          {hasMusic && (
+            <button
+              type="button"
+              onClick={toggleSound}
+              className={`absolute right-[clamp(14px,2.4vw,28px)] top-[clamp(14px,2.4vw,28px)] z-10 inline-flex h-10 items-center gap-2 rounded-full bg-white/15 px-4 text-[13px] font-medium text-white backdrop-blur-md transition-colors hover:bg-white/25 ${
+                soundOn ? '' : 'sound-pulse'
+              }`}
+              aria-pressed={soundOn}
+              aria-label={soundOn ? 'Mute the music' : 'Play with sound'}
+            >
+              {soundOn ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              {soundOn ? 'Sound on' : 'Tap for sound'}
+            </button>
+          )}
 
           {/* Controls + scrubber, like a video player */}
           <div className="absolute inset-x-[clamp(18px,3vw,36px)] bottom-[clamp(16px,3vw,28px)] flex items-center gap-4">
