@@ -202,7 +202,7 @@ export default function MarketingLayout() {
           <nav className="wrap mt-2" aria-label="Mobile">
             <ol>
               {navLinks.map((link) => (
-                <li key={link.label} className="border-b border-border">
+                <li key={link.label}>
                   <a
                     href={resolveHref(link.to)}
                     onClick={close}
@@ -212,7 +212,7 @@ export default function MarketingLayout() {
                   </a>
                 </li>
               ))}
-              <li className="border-b border-border">
+              <li>
                 <Link
                   to="/ambassador"
                   onClick={close}

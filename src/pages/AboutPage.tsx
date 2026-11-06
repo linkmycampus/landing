@@ -127,9 +127,9 @@ export default function AboutPage() {
             A campus feed, chat, Pages, events and reels, open to all students in Nigeria.
           </p>
 
-          <dl className="mt-10 max-w-md border-t border-border">
+          <dl className="mt-10 grid max-w-md gap-2">
             {metaRows.map((row) => (
-              <div key={row.label} className="flex items-center justify-between border-b border-border py-3.5">
+              <div key={row.label} className="flex items-center justify-between rounded-[14px] bg-surface px-4 py-3.5">
                 <dt className="text-[15px] text-muted">{row.label}</dt>
                 <dd className="font-mono text-[13px] text-ink">{row.value}</dd>
               </div>
@@ -138,11 +138,11 @@ export default function AboutPage() {
         </div>
 
         <div>
-          <h2 className="t-title border-b border-ink pb-3.5">Policies and requests</h2>
-          <ul>
+          <h2 className="t-title">Policies and requests</h2>
+          <ul className="mt-5 grid gap-2">
             {legalLinks.map((item) => (
-              <li key={item.to} className="border-b border-border">
-                <Link to={item.to} className="group flex items-center justify-between gap-6 py-5">
+              <li key={item.to}>
+                <Link to={item.to} className="group flex items-center justify-between gap-6 rounded-[18px] bg-surface px-5 py-4 transition-colors hover:bg-tile">
                   <span>
                     <span className="t-title block">{item.title}</span>
                     <span className="t-body mt-0.5 block">{item.caption}</span>

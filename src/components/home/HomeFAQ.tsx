@@ -2,6 +2,22 @@ import { Plus } from 'lucide-react';
 
 const faqs = [
   {
+    q: 'What is LinkMyCampus?',
+    a: 'LinkMyCampus is the digital home of Planet Campus: one app where students discover what’s happening on campus, find events, meet people, join communities and share what’s going on around them. It brings your campus feed, chat, Pages, events and reels into one place.',
+  },
+  {
+    q: 'What is Planet Campus?',
+    a: 'Every campus is more than a school. It’s a world of its own, with its own people, culture, communities, businesses, events and stories. We call it Planet Campus, and LinkMyCampus is where that world lives online.',
+  },
+  {
+    q: 'Why did we build LinkMyCampus?',
+    a: 'Because campus life is scattered. One event is on Instagram, an announcement is buried in a WhatsApp group, an opportunity is shared in someone’s DM. You shouldn’t have to know the right people, or be in ten group chats, to know what’s happening on your campus.',
+  },
+  {
+    q: 'What can I do on LinkMyCampus?',
+    a: 'Follow your campus feed, watch campus reels, chat with coursemates, join Pages for your department, hostel or club, and find and register for events on your campus.',
+  },
+  {
     q: 'Who can join LinkMyCampus?',
     a: 'LinkMyCampus is open to students at all 328 universities, 203 polytechnics and 355 colleges in Nigeria. When you sign up you pick your campus, so your feed, Pages and events are full of people from your school.',
   },
@@ -49,10 +65,10 @@ export default function HomeFAQ() {
         </div>
 
         <div>
-          {faqs.map((f, i) => (
+          {faqs.map((f) => (
             <details
               key={f.q}
-              className={`faq-q group border-b border-border ${i === 0 ? 'border-t' : ''}`}
+              className="faq-q group mb-2 rounded-[18px] bg-surface px-5"
             >
               <summary className="flex min-h-16 cursor-pointer items-center justify-between gap-6 rounded-[6px] py-[18px]">
                 <span className="t-title">{f.q}</span>

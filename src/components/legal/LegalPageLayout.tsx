@@ -23,14 +23,14 @@ export default function LegalPageLayout({ title, updated, children }: LegalPageL
           <h1 className="display max-w-[11em]">{title}</h1>
           <p className="meta mt-4">Updated {updated}</p>
 
-          <nav aria-label="Legal pages" className="mt-10 hidden max-w-xs border-t border-border lg:block">
+          <nav aria-label="Legal pages" className="mt-10 hidden max-w-xs flex-col gap-1 lg:flex">
             {legalNav.map((l) => (
               <NavLink
                 key={l.to}
                 to={l.to}
                 className={({ isActive }) =>
-                  `block border-b border-border py-3 text-[15px] transition-colors hover:text-ink ${
-                    isActive ? 'text-ink' : 'text-muted'
+                  `block rounded-full px-4 py-2.5 text-[15px] transition-colors hover:text-ink ${
+                    isActive ? 'bg-surface text-ink' : 'text-muted'
                   }`
                 }
               >
@@ -43,7 +43,7 @@ export default function LegalPageLayout({ title, updated, children }: LegalPageL
         <div className="max-w-[40em]">
           <div className="prose-lmc">{children}</div>
 
-          <p className="mt-12 border-t border-border pt-6 text-[15px] text-muted">
+          <p className="mt-12 text-[15px] text-muted">
             Questions?{' '}
             <a href="mailto:support@linkmycampus.com" className="inline-link">
               support@linkmycampus.com

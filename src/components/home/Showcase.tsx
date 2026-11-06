@@ -120,12 +120,12 @@ export default function Showcase() {
           </div>
 
           {/* The screen */}
-          <div className="relative mx-auto w-[min(78vw,320px)] lg:w-[min(300px,calc(64vh*9/19))]">
+          <div className="relative mx-auto w-[min(78vw,320px)] lg:w-[min(300px,calc(64vh/1.96))]">
             <div
               className="pointer-events-none absolute -inset-[30%] rounded-full bg-[radial-gradient(closest-side,rgba(107,79,216,0.32),transparent)] blur-2xl"
               aria-hidden
             />
-            <div className="relative aspect-[9/19] overflow-hidden rounded-[34px] bg-white shadow-[0_50px_100px_-35px_rgba(30,12,80,0.5),0_0_0_1px_rgba(0,0,0,0.06)]">
+            <div className="relative aspect-[1/1.96] overflow-hidden rounded-[34px] bg-white shadow-[0_50px_100px_-35px_rgba(30,12,80,0.5),0_0_0_1px_rgba(0,0,0,0.06)]">
               {FEATURES.map((f, k) => (
                 <img
                   key={f.title}

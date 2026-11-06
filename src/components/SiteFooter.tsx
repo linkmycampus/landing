@@ -54,7 +54,7 @@ function FooterLink({ label, to }: { label: string; to: string }) {
 
 export default function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t border-border pt-16">
+    <footer className="relative overflow-hidden pt-16">
       <div className="wrap relative z-10">
         <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
           <Link to="/" aria-label="LinkMyCampus home" className="inline-flex h-fit w-fit items-center">

@@ -13,13 +13,13 @@ export default function ClosingCTA() {
               Your campus
               <span className="block text-faint">is waiting.</span>
             </h2>
-            <dl className="mt-8 max-w-sm border-t border-border">
+            <dl className="mt-8 grid max-w-sm gap-2">
               {[
                 ['Email', 'hello@linkmycampus.com', 'mailto:hello@linkmycampus.com'],
                 ['Support', 'support@linkmycampus.com', 'mailto:support@linkmycampus.com'],
                 ['Ambassadors', 'Apply to represent your school', '/ambassador'],
               ].map(([k, v, href]) => (
-                <div key={k} className="flex items-baseline justify-between gap-4 border-b border-border py-3.5">
+                <div key={k} className="flex items-baseline justify-between gap-4 rounded-[14px] bg-surface px-4 py-3.5">
                   <dt className="text-[14px] text-muted">{k}</dt>
                   <dd className="text-right text-[14px]">
                     {href.startsWith('/') ? (

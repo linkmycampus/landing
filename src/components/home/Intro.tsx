@@ -15,7 +15,7 @@ const stats = [
 
 export default function Intro() {
   return (
-    <section id="about" aria-labelledby="intro-title" className="relative z-[1] pb-[clamp(72px,10vw,144px)]">
+    <section id="about" aria-labelledby="intro-title" className="relative z-[1] -mt-1 bg-white pt-1 pb-[clamp(72px,10vw,144px)]">
       <div className="wrap">
         <Reveal className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <h2
