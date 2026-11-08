@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react';
 const faqs = [
   {
     q: 'What is LinkMyCampus?',
-    a: 'LinkMyCampus is the digital home of Planet Campus: one app where students discover what’s happening on campus, find events, meet people, join communities and share what’s going on around them. It brings your campus feed, chat, Pages, events and reels into one place.',
+    a: 'LinkMyCampus is the digital home of Planet Campus: one app where students discover what’s happening on campus, find events, meet people, join communities and share what’s going on around them. It brings your campus Feed, Chat, Pages, Events and Reels into one place.',
   },
   {
     q: 'What is Planet Campus?',
@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: 'Who can join LinkMyCampus?',
-    a: 'LinkMyCampus is open to students at all 328 universities, 203 polytechnics and 355 colleges in Nigeria. When you sign up you pick your campus, so your feed, Pages and events are full of people from your school.',
+    a: 'LinkMyCampus is open to students at all 328 universities, 203 polytechnics and 355 colleges in Nigeria. When you sign up you pick your campus, so your Feed, Pages and Events are full of people from your school.',
   },
   {
     q: 'Is the ambassador or creator program a job?',

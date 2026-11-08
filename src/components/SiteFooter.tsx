@@ -8,8 +8,8 @@ const columns = [
   {
     title: 'Explore',
     links: [
-      { label: 'Features', to: '/#features' },
-      { label: 'Creators', to: '/#creators' },
+      { label: 'Features', to: '/features' },
+      { label: 'Creators', to: '/creators' },
       { label: 'Ambassadors', to: '/ambassador' },
       { label: 'Partners', to: '/partners' },
       { label: 'Waitlist', to: '/waitlist' },
@@ -19,7 +19,7 @@ const columns = [
     title: 'Help',
     links: [
       { label: 'Email', to: 'mailto:hello@linkmycampus.com' },
-      { label: 'FAQs', to: '/#faq' },
+      { label: 'FAQs', to: '/faq' },
       { label: 'About', to: '/about' },
       { label: 'Support', to: 'mailto:support@linkmycampus.com' },
     ],
@@ -39,7 +39,7 @@ const columns = [
 function FooterLink({ label, to }: { label: string; to: string }) {
   const cls =
     'text-[17px] tracking-[-0.02em] text-muted transition-colors duration-150 hover:text-brand md:text-[18px]';
-  if (to.startsWith('/#') || to.startsWith('mailto:')) {
+  if (to.startsWith('mailto:')) {
     return (
       <a href={to} className={cls}>
         {label}

@@ -138,7 +138,7 @@ export default function HomeHero() {
                 Join the waitlist
               </Link>
               <div className="grid gap-1">
-                <p className="text-[15px] font-medium">Feed, chat, Pages, events and reels.</p>
+                <p className="text-[15px] font-medium">Feed, Chat, Pages, Events and Reels.</p>
                 <p className="text-[13px] text-white/70">Open to all students in Nigeria.</p>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MarketingLayout from './layouts/MarketingLayout';
 import HomePage from './pages/HomePage';
+import { SECTIONS } from './config/sections';
 import WaitlistPage from './pages/WaitlistPage';
 import { AmbassadorRoute, PartnersHub, ProgramRoute } from './pages/PartnerPage';
 import AboutPage from './pages/AboutPage';
@@ -16,6 +17,10 @@ function App() {
       <Routes>
         <Route element={<MarketingLayout />}>
           <Route index element={<HomePage />} />
+          {/* Clean section addresses: /story, /features, /campus, /creators, /faq */}
+          {Object.keys(SECTIONS).map((path) => (
+            <Route key={path} path={path} element={<HomePage />} />
+          ))}
           <Route path="waitlist" element={<WaitlistPage />} />
           <Route path="ambassador" element={<AmbassadorRoute />} />
           <Route path="partners" element={<PartnersHub />} />

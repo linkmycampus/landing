@@ -124,7 +124,7 @@ export default function AboutPage() {
             <span className="t2">The social app for your campus.</span>
           </h2>
           <p className="lede mt-5 max-w-[28em]">
-            A campus feed, chat, Pages, events and reels, open to all students in Nigeria.
+            A campus Feed, Chat, Pages, Events and Reels, open to all students in Nigeria.
           </p>
 
           <dl className="mt-10 grid max-w-md gap-2">

@@ -4,36 +4,47 @@ import { Menu, X } from 'lucide-react';
 import { images } from '../assets/images';
 import SiteFooter from '../components/SiteFooter';
 import { applyPageMeta } from '../config/seo';
+import { SECTIONS, scrollToSection, sectionFor } from '../config/sections';
 
+/* Section links use clean addresses (/story, not /#story). id is the section they scroll to. */
 const navLinks = [
-  { label: 'Our story', to: '/#story' },
-  { label: 'Features', to: '/#features' },
-  { label: 'Campus', to: '/#moments' },
-  { label: 'Creators', to: '/#creators' },
-  { label: 'FAQ', to: '/#faq' },
+  { label: 'Our story', to: '/story', id: 'story' },
+  { label: 'Features', to: '/features', id: 'features' },
+  { label: 'Campus', to: '/campus', id: 'moments' },
+  { label: 'Creators', to: '/creators', id: 'creators' },
+  { label: 'FAQ', to: '/faq', id: 'faq' },
 ];
 
 export default function MarketingLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { pathname } = useLocation();
-  const isHome = pathname === '/';
-  const { hash } = useLocation();
+  const { pathname, hash } = useLocation();
+  const section = sectionFor(pathname);
+  const isHome = pathname === '/' || !!section;
 
   // Title, description and social tags for the current page.
   useEffect(() => {
     applyPageMeta(pathname);
   }, [pathname]);
 
-  // Open every page at the top (unless the link points at a section, e.g. /#faq).
+  // Open every page at the top, unless the address is a homepage section (/creators) or an old /#creators link.
   useEffect(() => {
-    if (hash) {
-      const el = document.getElementById(hash.slice(1));
-      if (el) el.scrollIntoView();
-      return;
+    const id = section ?? (hash ? hash.slice(1) : null);
+    if (id) {
+      // An old /#creators link: swap the address for the clean one (/creators).
+      const clean = Object.keys(SECTIONS).find((k) => SECTIONS[k] === id);
+      if (!section && hash && clean && pathname === '/') window.history.replaceState(window.history.state, '', '/' + clean);
+      // Wait a moment so the homepage has drawn before scrolling to the section.
+      const t = window.setTimeout(() => scrollToSection(id), 60);
+      // Photos above can still be loading and push the section down: settle on it again.
+      const t2 = window.setTimeout(() => scrollToSection(id), 900);
+      return () => {
+        window.clearTimeout(t);
+        window.clearTimeout(t2);
+      };
     }
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [pathname, hash]);
+  }, [pathname, hash, section]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -50,7 +61,14 @@ export default function MarketingLayout() {
   }, [menuOpen]);
 
   const close = () => setMenuOpen(false);
-  const resolveHref = (to: string) => (to.startsWith('/#') && isHome ? to.slice(1) : to);
+  // Clicking the section you are already on still scrolls back to it.
+  const goTo = (to: string, id: string) => (e: React.MouseEvent) => {
+    close();
+    if (pathname === to) {
+      e.preventDefault();
+      scrollToSection(id);
+    }
+  };
   // On the homepage the header sits over the purple hero until you scroll.
   const overHero = isHome && !scrolled;
 
@@ -63,7 +81,7 @@ export default function MarketingLayout() {
 
   useEffect(() => {
     if (!isHome) return;
-    const ids = navLinks.map((l) => l.to.slice(2));
+    const ids = navLinks.map((l) => l.id);
     const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (!els.length || !('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver(
@@ -139,13 +157,14 @@ export default function MarketingLayout() {
               style={{ opacity: 0 }}
             />
             {navLinks.map((link) => {
-              const id = link.to.slice(2);
+              const id = link.id;
               const on = target === id;
               return (
-              <a
+              <Link
                 key={link.label}
                 data-id={id}
-                href={resolveHref(link.to)}
+                to={link.to}
+                onClick={goTo(link.to, id)}
                 onMouseEnter={() => setHovered(id)}
                 onFocus={() => setHovered(id)}
                 onBlur={() => setHovered(null)}
@@ -155,7 +174,7 @@ export default function MarketingLayout() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
               );
             })}
           </nav>
@@ -202,13 +221,13 @@ export default function MarketingLayout() {
             <ol>
               {navLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={resolveHref(link.to)}
-                    onClick={close}
+                  <Link
+                    to={link.to}
+                    onClick={goTo(link.to, link.id)}
                     className="flex items-baseline gap-4 py-4 font-display text-[26px] font-semibold tracking-[-0.025em]"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li>

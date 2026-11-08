@@ -1,3 +1,5 @@
+import { sectionFor } from './sections';
+
 /* Search and link-preview metadata for every page. The layout applies it on each route change. */
 
 export const SITE_URL = 'https://www.linkmycampus.com';
@@ -7,7 +9,7 @@ export const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 type PageMeta = { title: string; description: string; noindex?: boolean };
 
 const DEFAULT_DESCRIPTION =
-  'LinkMyCampus is the social app for university, polytechnic and college students in Nigeria. Campus feed, chat, Pages, events and reels in one place. Live more. Connect more.';
+  'LinkMyCampus is the social app for university, polytechnic and college students in Nigeria. Campus Feed, Chat, Pages, Events and Reels in one place. Live more. Connect more.';
 
 export const PAGE_META: Record<string, PageMeta> = {
   '/': {
@@ -23,6 +25,34 @@ export const PAGE_META: Record<string, PageMeta> = {
     title: 'Join the waitlist | LinkMyCampus',
     description:
       'Get early access to LinkMyCampus at your school. Open to all students at universities, polytechnics and colleges in Nigeria.',
+  },
+  '/partners': {
+    title: 'Partner with LinkMyCampus | LinkMyCampus',
+    description: 'Become a Campus Ambassador, Creator, Faculty Page Moderator, Onboarding Team Member or Media Partner. Read the agreement and sign it online.',
+  },
+  '/partners/creator': {
+    title: 'Become a Campus Creator | LinkMyCampus',
+    description: 'O.G and Departmental Creators make videos on LinkMyCampus and earn sponsorship vouchers for their own brand.',
+  },
+  '/partners/og-creator': {
+    title: 'O.G Creator agreement | LinkMyCampus',
+    description: 'Make content for every OAU student on LinkMyCampus and earn sponsorship vouchers. Read and sign the agreement online.',
+  },
+  '/partners/departmental-creator': {
+    title: 'Departmental Creator agreement | LinkMyCampus',
+    description: "Make content for your department's students on LinkMyCampus and earn sponsorship vouchers. Read and sign the agreement online.",
+  },
+  '/partners/faculty-page-moderator': {
+    title: 'Faculty Page Moderator | LinkMyCampus',
+    description: 'Create and manage the official LinkMyCampus page for your faculty. Read and sign the agreement online.',
+  },
+  '/partners/onboarding-team-member': {
+    title: 'Join the onboarding team | LinkMyCampus',
+    description: 'Help OAU students get on LinkMyCampus and earn NGN 50 for every qualifying user. Read and sign the agreement online.',
+  },
+  '/partners/media': {
+    title: 'Media & Blog Partner | LinkMyCampus',
+    description: 'Campus media and blogs: promote LinkMyCampus to OAU students for 4 weeks and earn up to NGN 50,000.',
   },
   '/ambassador': {
     title: 'Become a campus ambassador | LinkMyCampus',
@@ -69,7 +99,8 @@ function setMeta(attr: 'name' | 'property', key: string, value: string) {
 
 /** Apply the title, description, canonical URL and social tags for a route. */
 export function applyPageMeta(pathname: string) {
-  const path = pathname.replace(/\/+$/, '') || '/';
+  // Section addresses like /creators are the homepage, so they share its title and canonical URL.
+  const path = sectionFor(pathname) ? '/' : pathname.replace(/\/+$/, '') || '/';
   const meta = PAGE_META[path] ?? FALLBACK_META;
   const url = SITE_URL + (path === '/' ? '/' : path);
 
