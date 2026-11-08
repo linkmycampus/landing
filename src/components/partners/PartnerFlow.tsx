@@ -24,12 +24,23 @@ import {
   Video,
   Wallet,
 } from 'lucide-react';
-import type { IconName, Item, Program } from '../../config/partners';
+import { COMMUNITY_REDIRECT_SECONDS, type IconName, type Item, type Program } from '../../config/partners';
 import { BRAND, BRAND_ICON, ICON_GREY_ON_DARK } from '../../config/iconColors';
-import { buildSignedPdf, submitRecord, type Signature, type SignedRecord } from '../../lib/signedAgreement';
+import {
+  buildSignedPdf,
+  checkEmail,
+  submitErrorMessage,
+  submitRecord,
+  type BotCheck,
+  type Signature,
+  type SignedRecord,
+} from '../../lib/signedAgreement';
+import { validateDetails } from '../../lib/validation';
 import SignaturePad from './SignaturePad';
 import Select from '../forms/Select';
 import UniversityInput from '../forms/UniversityInput';
+import SocialsInput from '../forms/SocialsInput';
+import Turnstile, { turnstileEnabled } from '../forms/Turnstile';
 
 const ICONS: Record<IconName, typeof Award> = {
   award: Award,
@@ -225,8 +236,33 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [signedUrl, setSignedUrl] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [token, setToken] = useState('');
+  const [tick, setTick] = useState(0);
+  const [stay, setStay] = useState(false);
+  const bot = useRef<Omit<BotCheck, 'turnstileToken'>>({ hp: '', elapsedMs: 0 });
+  const formShownAt = useRef(0);
   const top = useRef<HTMLDivElement>(null);
   const first = useRef(true);
+  const done = step === total - 1;
+  const communityUrl = program.community.url;
+
+  // Note when the details form appears, to spot submissions too fast for a person.
+  useEffect(() => {
+    if (step === 3) formShownAt.current = Date.now();
+  }, [step]);
+
+  // After a successful application, count down and send people into the community group.
+  const redirecting = done && !!communityUrl && !stay;
+  const countdown = redirecting ? Math.max(0, COMMUNITY_REDIRECT_SECONDS - tick) : null;
+  useEffect(() => {
+    if (!redirecting) return;
+    const id = window.setInterval(() => setTick((t) => t + 1), 1000);
+    return () => window.clearInterval(id);
+  }, [redirecting]);
+  useEffect(() => {
+    if (redirecting && tick >= COMMUNITY_REDIRECT_SECONDS) window.location.assign(communityUrl);
+  }, [redirecting, tick, communityUrl]);
 
   // Bring the top of the card into view on each step (helps on phones).
   useEffect(() => {
@@ -251,26 +287,50 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
 
   const saveDetails = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
-    setDetails(data);
-    if (!typed) setTyped(data.fullName ?? '');
-    if (hasAgreement) return next();
+    const raw = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
+    bot.current = { hp: raw.website ?? '', elapsedMs: Date.now() - formShownAt.current };
+    delete raw.website;
+
+    const { values, errors } = validateDetails(program.fields, raw);
+    setDetails(values);
+    setFieldErrors(errors);
+    setError('');
+    if (Object.keys(errors).length) return;
+    if (!typed) setTyped(values.fullName ?? '');
+
+    setBusy(true);
+    // Reject a repeat email now, before they read and sign the agreement.
+    // If the check itself can't run, carry on: the final submit checks again.
+    if (values.email) {
+      const check = await checkEmail(program.slug, values.email);
+      if (!check.ok && (check.error === 'duplicate' || check.error === 'invalid')) {
+        setBusy(false);
+        setFieldErrors(check.error === 'duplicate' ? { email: submitErrorMessage(check, values.email) } : {});
+        if (check.error === 'invalid') setError(submitErrorMessage(check));
+        return;
+      }
+    }
+    if (hasAgreement) {
+      setBusy(false);
+      return next();
+    }
 
     // No agreement for this role yet: send the application and finish.
-    setBusy(true);
-    setError('');
-    const ok = await submitRecord({
-      program: program.slug,
-      agreementVersion: program.version,
-      fullName: data.fullName ?? '',
-      details: data,
-      signature: { kind: 'typed', text: '' },
-      signedAt: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-    });
+    const res = await submitRecord(
+      {
+        program: program.slug,
+        agreementVersion: program.version,
+        fullName: values.fullName ?? '',
+        details: values,
+        signature: { kind: 'typed', text: '' },
+        signedAt: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+      },
+      { ...bot.current, turnstileToken: token },
+    );
     setBusy(false);
-    if (ok) next();
-    else setError('We couldn’t send that. Check your connection and try again.');
+    if (res.ok) next();
+    else setError(submitErrorMessage(res, values.email));
   };
 
   const sign = async () => {
@@ -289,18 +349,22 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
     try {
       const doc = await buildSignedPdf(program, record);
       const pdfBase64 = doc.output('datauristring').split(',')[1];
-      const ok = await submitRecord(record, pdfBase64);
-      if (!ok) throw new Error('submit failed');
+      const res = await submitRecord(record, { ...bot.current, turnstileToken: token }, pdfBase64);
+      if (!res.ok) {
+        setError(submitErrorMessage(res, details.email));
+        return;
+      }
       setSignedUrl(URL.createObjectURL(doc.output('blob')));
       next();
     } catch {
-      setError('We couldn’t save your signature. Check your connection and try again.');
+      setError('We couldn’t prepare your signed agreement. Try again.');
     } finally {
       setBusy(false);
     }
   };
 
   const canSign = mode === 'typed' ? typed.trim().length > 1 : !!drawn;
+  const humanChecked = !turnstileEnabled || !!token;
   const fileName = `LMC_${program.agreementTitle.replace(/[^A-Za-z]+/g, '_')}_${(details.fullName ?? '').replace(/\s+/g, '_')}.pdf`;
   const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -335,12 +399,17 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
     );
   } else if (step === 3) {
     body = (
-      <form onSubmit={saveDetails}>
+      <form onSubmit={saveDetails} noValidate>
+        {/* Honeypot: hidden from people, filled in by bots. */}
+        <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+          <label htmlFor="website">Website</label>
+          <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+        </div>
         <h2 className={titleCls}>Tell us about you.</h2>
         <p className="t-body mt-2">Takes less than a minute.</p>
         <div className="mt-7 grid gap-5 sm:grid-cols-2">
           {program.fields.map((f) => {
-            const wide = f.type === 'textarea' || f.type === 'select' || f.id === 'fullName' || f.id === 'university';
+            const wide = f.type === 'textarea' || f.type === 'select' || f.type === 'socials' || f.id === 'fullName' || f.id === 'university';
             return (
               <div key={f.id} className={wide ? 'sm:col-span-2' : ''}>
                 <label htmlFor={f.id} className="field-label">
@@ -348,6 +417,14 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
                 </label>
                 {f.type === 'select' ? (
                   <Select id={f.id} name={f.id} required options={f.options ?? []} defaultValue={details[f.id] ?? ''} />
+                ) : f.type === 'socials' ? (
+                  <SocialsInput
+                    id={f.id}
+                    name={f.id}
+                    defaultValue={details[f.id] ?? ''}
+                    invalid={!!fieldErrors[f.id]}
+                    describedBy={fieldErrors[f.id] ? `-error` : undefined}
+                  />
                 ) : f.id === 'university' ? (
                   <UniversityInput id={f.id} name={f.id} defaultValue={details[f.id] ?? ''} />
                 ) : f.type === 'textarea' ? (
@@ -369,15 +446,28 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
                     placeholder={f.placeholder}
                     autoComplete={f.autoComplete}
                     defaultValue={details[f.id]}
+                    aria-invalid={!!fieldErrors[f.id]}
+                    aria-describedby={fieldErrors[f.id] ? `${f.id}-error` : undefined}
                     className="field"
                   />
+                )}
+                {fieldErrors[f.id] && (
+                  <p id={`${f.id}-error`} className="mt-1.5 text-[12.5px] text-red-600">
+                    {fieldErrors[f.id]}
+                  </p>
                 )}
               </div>
             );
           })}
         </div>
+        {!hasAgreement && <Turnstile onToken={setToken} />}
         {error && <p className="mt-4 text-[13px] text-red-600">{error}</p>}
-        <Nav onBack={back} submit disabled={busy} next={hasAgreement ? 'Continue' : busy ? 'Sending…' : 'Send application'} />
+        <Nav
+          onBack={back}
+          submit
+          disabled={busy || (!hasAgreement && !humanChecked)}
+          next={busy ? 'Checking…' : hasAgreement ? 'Continue' : 'Send application'}
+        />
       </form>
     );
   } else if (hasAgreement && step === 4) {
@@ -515,8 +605,9 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
           Your electronic signature counts the same as signing on paper. We record the agreement version, the date and time,
           and the device you sign on.
         </p>
+        <Turnstile onToken={setToken} />
         {error && <p className="mt-3 text-[13px] text-red-600">{error}</p>}
-        <Nav onBack={back} onNext={sign} disabled={!canSign || busy} next={busy ? 'Signing…' : 'Sign agreement'} />
+        <Nav onBack={back} onNext={sign} disabled={!canSign || busy || !humanChecked} next={busy ? 'Signing…' : 'Sign agreement'} />
       </>
     );
   } else {
@@ -540,33 +631,32 @@ export default function PartnerFlow({ program, onExit }: { program: Program; onE
             : 'Thanks for reaching out. Our team will get back to you soon.'}
         </p>
 
-        <div className="mt-7 grid gap-3">
-          {url ? (
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 rounded-[20px] bg-brand p-4 text-white transition-transform hover:-translate-y-0.5"
-            >
-              <MessageCircle size={22} strokeWidth={1.8} className="shrink-0" style={{ color: ICON_GREY_ON_DARK }} aria-hidden />
-              <span className="flex-1 font-semibold">{label}</span>
+        {url && (
+          <div className="mt-7 text-center">
+            {/* The group link for this form: people tap it, or are taken there automatically. */}
+            <a href={url} aria-label={label} className="btn btn-lg ring-glow w-full gap-2.5">
+              <MessageCircle size={19} strokeWidth={2} aria-hidden />
+              Go to WhatsApp
             </a>
-          ) : (
-            <div className="flex items-center gap-4 rounded-[20px] bg-brand p-4 text-white">
-              <MessageCircle size={22} strokeWidth={1.8} className="shrink-0" style={{ color: ICON_GREY_ON_DARK }} aria-hidden />
-              <span className="text-[14px] leading-snug">
-                <span className="block font-semibold">{label}</span>
-                <span className="text-white/70">
-                  We’ll send the link to {details.email || 'your email'} and WhatsApp.
-                </span>
-              </span>
-            </div>
-          )}
+            {countdown !== null ? (
+              <p className="mt-3 text-[13px] text-muted" aria-live="polite">
+                Taking you to the WhatsApp group in {countdown}s…{' '}
+                <button type="button" onClick={() => setStay(true)} className="font-medium text-ink underline underline-offset-4">
+                  Stay here
+                </button>
+              </p>
+            ) : (
+              <p className="mt-3 text-[13px] text-muted">Tap the button to join the WhatsApp group.</p>
+            )}
+          </div>
+        )}
 
+        <div className="mt-6 grid gap-3">
           {signedUrl && (
             <a
               href={signedUrl}
               download={fileName}
+              onClick={() => setStay(true)}
               className="group flex items-center gap-4 rounded-[20px] p-4 transition-transform hover:-translate-y-0.5"
               style={{ background: 'var(--bg-2)' }}
             >

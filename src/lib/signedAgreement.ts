@@ -15,21 +15,63 @@ export type SignedRecord = {
   userAgent: string;
 };
 
-/** Sends the signed record to the backend. Returns false if it could not be saved. */
-export async function submitRecord(record: SignedRecord, pdfBase64?: string): Promise<boolean> {
-  if (!PARTNER_SUBMIT_URL) {
-    console.warn('VITE_PARTNER_SUBMIT_URL is not set, so this signed agreement was not saved anywhere.', record);
-    return true;
-  }
+/** Bot-check fields sent with every submission. */
+export type BotCheck = {
+  /** Cloudflare Turnstile token ('' when Turnstile is not configured). */
+  turnstileToken: string;
+  /** Hidden honeypot field. People leave it empty; bots fill it in. */
+  hp: string;
+  /** Milliseconds between the details form appearing and being sent. */
+  elapsedMs: number;
+};
+
+export type SubmitError = 'duplicate' | 'invalid' | 'bot' | 'network' | 'server';
+export type SubmitResult = { ok: true } | { ok: false; error: SubmitError; message?: string };
+
+/* text/plain keeps this a "simple" request, which Google Apps Script accepts without a CORS preflight. */
+async function post(body: unknown): Promise<SubmitResult> {
   try {
     const res = await fetch(PARTNER_SUBMIT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...record, pdfBase64 }),
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body),
     });
-    return res.ok;
+    if (!res.ok) return { ok: false, error: 'server' };
+    const data = (await res.json()) as { ok?: boolean; error?: SubmitError; message?: string };
+    return data.ok ? { ok: true } : { ok: false, error: data.error ?? 'server', message: data.message };
   } catch {
-    return false;
+    return { ok: false, error: 'network' };
+  }
+}
+
+/** Asks the sheet whether this email has already applied to this programme. */
+export async function checkEmail(program: string, email: string): Promise<SubmitResult> {
+  if (!PARTNER_SUBMIT_URL) return { ok: true };
+  return post({ action: 'check', program, email });
+}
+
+/** Sends the application (and signed PDF, if any) to the sheet. */
+export async function submitRecord(record: SignedRecord, bot: BotCheck, pdfBase64?: string): Promise<SubmitResult> {
+  if (!PARTNER_SUBMIT_URL) {
+    console.warn('VITE_PARTNER_SUBMIT_URL is not set, so this application was not saved anywhere.', record);
+    return { ok: true };
+  }
+  return post({ action: 'submit', ...record, ...bot, pdfBase64 });
+}
+
+/** A message people can act on, for each way a submission can fail. */
+export function submitErrorMessage(r: Extract<SubmitResult, { ok: false }>, email?: string) {
+  switch (r.error) {
+    case 'duplicate':
+      return `${email || 'This email'} has already applied. Use a different email, or contact us if you need to change your application.`;
+    case 'invalid':
+      return r.message || 'Some details aren’t right. Check the form and try again.';
+    case 'bot':
+      return 'We couldn’t confirm you’re human. Complete the check below and try again.';
+    case 'network':
+      return 'We couldn’t send that. Check your connection and try again.';
+    default:
+      return 'Something went wrong on our side. Try again in a minute.';
   }
 }
 
@@ -76,11 +118,19 @@ export async function buildSignedPdf(program: Program, record: SignedRecord) {
       }),
     ['Start date', signedOn],
   ];
+  if (program.durationDays) {
+    const end = new Date(record.signedAt);
+    end.setDate(end.getDate() + program.durationDays);
+    rows.push(['End date', end.toLocaleDateString('en-GB', { dateStyle: 'long' })]);
+  }
   doc.setFontSize(9);
-  for (let i = 0; i < rows.length; i += 2) {
+  // Short answers sit two to a row; lists (several social handles) get a full-width row.
+  const shortRows = rows.filter(([, v]) => !v.includes('\n'));
+  const longRows = rows.filter(([, v]) => v.includes('\n'));
+  for (let i = 0; i < shortRows.length; i += 2) {
     doc.setFillColor(244, 238, 250);
     doc.rect(M, y - 12, maxW, 20, 'F');
-    rows.slice(i, i + 2).forEach(([label, value], j) => {
+    shortRows.slice(i, i + 2).forEach(([label, value], j) => {
       const x = M + 10 + j * (maxW / 2);
       doc.setFont('helvetica', 'bold').setTextColor(...PURPLE);
       doc.text(`${label}:`, x, y + 1);
@@ -90,6 +140,20 @@ export async function buildSignedPdf(program: Program, record: SignedRecord) {
     });
     y += 26;
   }
+  longRows.forEach(([label, value]) => {
+    doc.setFont('helvetica', 'bold');
+    const lw = doc.getTextWidth(`${label}:`) + 5;
+    doc.setFont('helvetica', 'normal');
+    const lines: string[] = doc.splitTextToSize(value.split('\n').join('   ·   '), maxW - lw - 20);
+    const h = 8 + lines.length * 12;
+    doc.setFillColor(244, 238, 250);
+    doc.rect(M, y - 12, maxW, h, 'F');
+    doc.setFont('helvetica', 'bold').setTextColor(...PURPLE);
+    doc.text(`${label}:`, M + 10, y + 1);
+    doc.setFont('helvetica', 'normal').setTextColor(...INK);
+    lines.forEach((l, k) => doc.text(l, M + 10 + lw, y + 1 + k * 12));
+    y += h + 6;
+  });
 
   // Terms
   y += 8;

@@ -33,7 +33,7 @@ export type Item = { icon: IconName; text: string; /** Shown as a badge; the ite
 export type Field = {
   id: string;
   label: string;
-  type?: 'text' | 'email' | 'tel' | 'url' | 'select' | 'textarea';
+  type?: 'text' | 'email' | 'tel' | 'url' | 'select' | 'textarea' | 'socials';
   placeholder?: string;
   autoComplete?: string;
   options?: readonly (readonly [string, string])[];
@@ -58,6 +58,8 @@ export type Program = {
   pageDescription: string;
   /** Blank PDF of the agreement, for download. */
   pdf?: string;
+  /** Fixed-length agreements: the signed PDF shows an end date this many days after signing. */
+  durationDays?: number;
   doing: Item[];
   get: Item[];
   expect: Item[];
@@ -73,7 +75,8 @@ const base: Field[] = [
   { id: 'phone', label: 'WhatsApp number', type: 'tel', placeholder: '+234 …', autoComplete: 'tel' },
 ];
 
-const handle: Field = { id: 'handle', label: 'Platform handle', placeholder: 'Your LinkMyCampus username' };
+/* Any number of social accounts; each is saved on its own line, e.g. "Instagram: @ada". */
+const handle: Field = { id: 'handle', label: 'Social media handles', type: 'socials' };
 const faculty: Field = { id: 'faculty', label: 'Faculty', placeholder: 'e.g. Faculty of Technology' };
 
 /* Creator terms 2–10 are shared by O.G and Departmental Creators. */
@@ -129,6 +132,7 @@ export const PROGRAMS: Record<string, Program> = {
     version: 'ambassador-v1',
     pageTitle: 'Become an ambassador.',
     pageDescription: 'Bring LinkMyCampus to your school and lead the community there.',
+    pdf: '/agreements/ambassador.pdf',
     doing: [
       { icon: 'award', text: 'Represent LinkMyCampus' },
       { icon: 'megaphone', text: 'Spread the word' },
@@ -170,7 +174,7 @@ export const PROGRAMS: Record<string, Program> = {
       { title: 'Benefits', body: 'Rewards vary by availability and performance.' },
       { title: 'Ending', body: 'Either side may end the partnership.' },
     ],
-    community: { label: 'Join the ambassador community', url: '' },
+    community: { label: 'Join the ambassador community', url: 'https://chat.whatsapp.com/LibmNI8mw7B8Ni6LRSyJ5h' },
   },
 
   'og-creator': {
@@ -198,7 +202,7 @@ export const PROGRAMS: Record<string, Program> = {
       },
       ...creatorTerms,
     ],
-    community: { label: 'Join the creator community', url: '' },
+    community: { label: 'Join the creator community', url: 'https://chat.whatsapp.com/LVDeVGjhyO5AmUW1CGaaau' },
   },
 
   'departmental-creator': {
@@ -231,7 +235,7 @@ export const PROGRAMS: Record<string, Program> = {
       },
       ...creatorTerms,
     ],
-    community: { label: 'Join the creator community', url: '' },
+    community: { label: 'Join the creator community', url: 'https://chat.whatsapp.com/LVDeVGjhyO5AmUW1CGaaau' },
   },
 
   'faculty-page-moderator': {
@@ -285,7 +289,7 @@ export const PROGRAMS: Record<string, Program> = {
         body: "From signing until either party ends it with 7 days' written notice. Qualifying videos made before signing do not count.",
       },
     ],
-    community: { label: 'Join the moderator community', url: '' },
+    community: { label: 'Join the page creators community', url: 'https://chat.whatsapp.com/I61nQnQwwpPF0CVEUETi82' },
   },
 
   'onboarding-team-member': {
@@ -339,46 +343,91 @@ export const PROGRAMS: Record<string, Program> = {
       },
       { title: 'Duration', body: 'From signing until the onboarding budget is used up or LMC ends the programme with notice.' },
     ],
-    community: { label: 'Join the onboarding team', url: '' },
+    community: { label: 'Join the onboarding team', url: 'https://chat.whatsapp.com/FnoWTAvUftQCeKDuMDBzu2' },
   },
 
   media: {
     slug: 'media',
     name: 'Media & Blog Partner',
     signer: 'Partner',
-    agreementTitle: 'Media & Blog Partner Agreement',
-    agreementSub: 'Campus media partnership',
-    version: 'media-v0',
+    agreementTitle: 'Media Partner Agreement',
+    agreementSub: '4-week launch campaign agreement',
+    version: 'media-partner-v1',
     pageTitle: 'Partner with us.',
-    pageDescription: 'Campus magazines, blogs and media houses: distribute your stories through LinkMyCampus.',
+    pageDescription: 'Campus media and blogs: promote LinkMyCampus to OAU students for 4 weeks and earn up to NGN 50,000.',
+    pdf: '/agreements/media-partner.pdf',
+    durationDays: 28,
     doing: [
-      { icon: 'newspaper', text: 'Share your campus stories' },
-      { icon: 'megaphone', text: 'Reach students across the network' },
-      { icon: 'message', text: 'Cover campus life as it happens' },
+      { icon: 'megaphone', text: 'Promote LinkMyCampus to OAU students for 4 weeks' },
+      { icon: 'newspaper', text: 'Post the pictures, videos and copy we supply' },
+      { icon: 'users', text: 'Run your own page, channel or group on LMC' },
     ],
     get: [
-      { icon: 'users', text: 'A bigger student audience' },
-      { icon: 'award', text: 'Official partner recognition' },
-      { icon: 'ticket', text: 'Early access to campus events' },
+      { icon: 'wallet', text: 'Up to NGN 50,000' },
+      { icon: 'repeat', text: 'NGN 12,500 at every 300 users' },
+      { icon: 'file', text: 'Ready-made content to share' },
     ],
     expect: [
-      { icon: 'shield', text: 'Accurate, respectful reporting' },
-      { icon: 'file', text: 'Follow brand guidelines' },
-      { icon: 'message', text: 'Stay in touch' },
+      { icon: 'userPlus', text: 'Bring 1,200 users with your link or code' },
+      { icon: 'ban', text: 'No bought or fake users' },
+      { icon: 'shield', text: 'Only claims LMC has approved' },
     ],
     fields: [
       ...base,
       { id: 'outlet', label: 'Media or blog name', placeholder: 'e.g. Campus Gist' },
-      { id: 'link', label: 'Link to your page', type: 'url', placeholder: 'https://…' },
-      { id: 'university', label: 'University', placeholder: 'e.g. Obafemi Awolowo University', autoComplete: 'organization' },
+      handle,
     ],
-    terms: null,
-    community: { label: 'Join the partner community', url: '' },
+    terms: [
+      {
+        title: 'Purpose',
+        body: 'The Partner will promote LinkMyCampus (LMC) to OAU students for a 4-week launch campaign. The agreement starts on the date it is signed and runs for 4 weeks.',
+      },
+      { title: 'LMC provides', body: 'Pictures, videos and post copy for the Partner to circulate on their platforms.' },
+      {
+        title: 'The Partner provides',
+        body: 'Regular posting of the supplied content, and a page, channel or group on LMC that the Partner creates, owns and manages, like the ones they run on WhatsApp or elsewhere.',
+      },
+      { title: 'Target', body: "1,200 users brought onto LMC through the Partner's unique link or code." },
+      {
+        title: 'Payment',
+        body: 'Total NGN 50,000, paid in four equal instalments of NGN 12,500. Each instalment is released when the Partner reaches each 25% of the target (300, 600, 900 and 1,200 users). The Partner is not paid in one lump sum.',
+      },
+      {
+        title: 'What counts as a user',
+        body: "Someone who signs up through the Partner's link or code, completes their profile, and is active on at least 3 days within their first 7 days. Duplicate, fake and unattributable accounts do not count.",
+      },
+      {
+        title: 'Tracking',
+        body: "LMC gives the Partner a unique Partner ID and link or code. LMC's records are the basis for all counts, and the Partner may request a weekly summary.",
+      },
+      {
+        title: 'Shortfall',
+        body: 'If the target is not reached by the end of the 4 weeks, payment stops at the last milestone reached and nothing further is owed.',
+      },
+      {
+        title: 'Conduct',
+        body: 'The Partner will not buy or fake users, misrepresent LMC, or publish claims LMC has not approved. LMC may end this agreement and stop payment for breach.',
+      },
+      { title: 'Changes', body: 'Any extension or change must be agreed in writing by both parties.' },
+    ],
+    community: { label: 'Join the media & blog partners community', url: 'https://chat.whatsapp.com/KX2tKiuLFoh6xiHq48dwa5' },
   },
 };
 
 /* Creator types offered when someone taps "Join as a creator". */
 export const CREATOR_TYPES = ['og-creator', 'departmental-creator'] as const;
 
-/* Where signed agreements are sent. Set VITE_PARTNER_SUBMIT_URL in Vercel. */
-export const PARTNER_SUBMIT_URL: string = import.meta.env?.VITE_PARTNER_SUBMIT_URL ?? '';
+/* Where applications and signed agreements are sent: the Google Apps Script web app
+   in integrations/google-sheet (one sheet and folder per form in the LinkMyCampus Drive).
+   This link is public by nature (browsers call it), so it lives here. VITE_PARTNER_SUBMIT_URL overrides it. */
+export const PARTNER_SUBMIT_URL: string =
+  import.meta.env?.VITE_PARTNER_SUBMIT_URL ??
+  'https://script.google.com/macros/s/AKfycbx6yIIpguoDsS8FInLNjiwRA8RiaYKP2Zznvl3P24-DVrH4rbt0LRD2VFHU7j33engF/exec';
+
+/* Cloudflare Turnstile site key (public, allowed only on linkmycampus.com). The secret key goes in the
+   Apps Script, never here. Only used on the live site: the check cannot run on localhost. */
+export const TURNSTILE_SITE_KEY: string =
+  import.meta.env?.VITE_TURNSTILE_SITE_KEY ?? (import.meta.env?.PROD ? '0x4AAAAAAF4yXREO3R4zAghv' : '');
+
+/* After a successful application, people are sent to the community link after this many seconds. */
+export const COMMUNITY_REDIRECT_SECONDS = 3;

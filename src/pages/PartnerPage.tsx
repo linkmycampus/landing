@@ -148,7 +148,7 @@ const HUB = [
   },
   { to: '/partners/faculty-page-moderator', slug: 'faculty-page-moderator', Icon: Building2, color: BRAND_ICON, perk: 'Sponsorship vouchers' },
   { to: '/partners/onboarding-team-member', slug: 'onboarding-team-member', Icon: Smartphone, color: BRAND_ICON, perk: 'NGN 50 per user' },
-  { to: '/partners/media', slug: 'media', Icon: Newspaper, color: BRAND_ICON, perk: 'Reach more students' },
+  { to: '/partners/media', slug: 'media', Icon: Newspaper, color: BRAND_ICON, perk: 'Up to NGN 50,000' },
 ];
 
 /** /partners: every way to work with LinkMyCampus. */
