@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { STORE_LINKS } from '../config/storeLinks';
@@ -27,8 +28,10 @@ function Badge({
   top,
   bottom,
   label,
+  soon = false,
 }: {
   href: string;
+  soon?: boolean;
   icon: React.ReactNode;
   top: string;
   bottom: string;
@@ -52,10 +55,40 @@ function Badge({
       </a>
     );
   }
+  if (soon) return <SoonBadge className={cls} label={label}>{inner}</SoonBadge>;
   return (
     <Link to="/waitlist" className={cls} aria-label={`${label} (coming soon, join the waitlist)`}>
       {inner}
     </Link>
+  );
+}
+
+/** A badge that shows a small "Coming soon" pop-up when tapped. */
+function SoonBadge({ className, label, children }: { className: string; label: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const t = window.setTimeout(() => setOpen(false), 2600);
+    return () => window.clearTimeout(t);
+  }, [open]);
+
+  return (
+    <span className="relative inline-flex">
+      <button type="button" className={className} aria-label={`${label} (coming soon)`} onClick={() => setOpen(true)}>
+        {children}
+      </button>
+      <span
+        role="status"
+        aria-live="polite"
+        className={`pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-black shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-[opacity,transform] duration-200 ${
+          open ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-0'
+        }`}
+      >
+        {open ? 'Coming soon to the App Store' : ''}
+        <span className="absolute left-1/2 top-full -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-white" />
+      </span>
+    </span>
   );
 }
 
@@ -82,6 +115,7 @@ export default function StoreBadges({
         top="Download on the"
         bottom="App Store"
         label="Download LinkMyCampus on the App Store"
+        soon={!STORE_LINKS.appStore}
       />
     </div>
   );

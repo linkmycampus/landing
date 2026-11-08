@@ -1,15 +1,15 @@
-import foodTruck from '../../assets/photos/food-truck.jpg';
-import graduatesGarden from '../../assets/photos/graduates-garden.jpg';
-import campusCrowd from '../../assets/photos/campus-crowd.jpg';
-import campusPharmacy from '../../assets/photos/campus-pharmacy.jpg';
+import marketStall from '../../assets/photos/market-stall.jpg';
+import signoutDay from '../../assets/photos/signout-day.jpg';
+import boysUnderTrees from '../../assets/photos/boys-under-trees.jpg';
+import friendsLawn from '../../assets/photos/friends-lawn.jpg';
 import { Reveal } from './primitives';
 
 /* After the reference's "Club moments gallery": a loose collage with small captions. */
 const shots = [
-  { src: campusCrowd, cap: 'Campus gathering', ratio: 'aspect-[4/3]' },
-  { src: graduatesGarden, cap: 'Graduation day', ratio: 'aspect-[3/4]' },
-  { src: foodTruck, cap: 'Campus eats', ratio: 'aspect-[4/5]' },
-  { src: campusPharmacy, cap: 'Around campus', ratio: 'aspect-[4/3]' },
+  { src: boysUnderTrees, cap: 'Campus gathering', ratio: 'aspect-[4/3]' },
+  { src: signoutDay, cap: 'Sign-out day', ratio: 'aspect-[3/4]' },
+  { src: marketStall, cap: 'Market day', ratio: 'aspect-[4/5]' },
+  { src: friendsLawn, cap: 'Around campus', ratio: 'aspect-[4/3]' },
 ];
 
 export default function Gallery() {

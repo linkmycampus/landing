@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import lecture from '../../assets/photos/lecture.jpg';
-import libraryHeart from '../../assets/photos/library-heart.jpg';
-import lectureChat from '../../assets/photos/lecture-chat.jpg';
+import marketFriends from '../../assets/photos/market-friends.jpg';
+import marketBeanbag from '../../assets/photos/market-beanbag.jpg';
+import marketTrio from '../../assets/photos/market-trio.jpg';
 import { Reveal, SecHead } from './primitives';
 
 const paths = [
@@ -10,21 +10,21 @@ const paths = [
     body: 'Represent LinkMyCampus at your school, host activations and grow a verified student community.',
     cta: 'Apply',
     to: '/ambassador',
-    src: lecture,
+    src: marketFriends,
   },
   {
     title: 'Campus Creator',
     body: 'Share campus stories and reels, build your audience and get featured across the network.',
     cta: 'Join as a creator',
-    to: '/waitlist',
-    src: libraryHeart,
+    to: '/partners/creator',
+    src: marketBeanbag,
   },
   {
     title: 'Media & Blog Partner',
     body: 'Campus magazines, blogs and media houses: distribute your stories through the network.',
     cta: 'Partner with us',
-    to: '/waitlist',
-    src: lectureChat,
+    to: '/partners/media',
+    src: marketTrio,
   },
 ];
 
@@ -61,6 +61,13 @@ export default function CreatorsSection() {
             </Link>
           ))}
         </Reveal>
+
+        <p className="mt-8 text-center text-[15px] text-muted">
+          Faculty page moderators and onboarding team members too.{' '}
+          <Link to="/partners" className="font-medium text-brand underline underline-offset-4">
+            See all partner roles
+          </Link>
+        </p>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const metaRows = [
   { label: 'App version', value: '1.0.0' },
-  { label: 'Release date', value: '2026-09-01' },
+  { label: 'Release date', value: '2026-11-12' },
 ];
 
 const legalLinks = [

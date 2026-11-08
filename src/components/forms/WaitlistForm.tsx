@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react';
+import UniversityInput from './UniversityInput';
 
 const fields = [
   { id: 'fullName', label: 'Full name', type: 'text', placeholder: 'Your full name', autoComplete: 'name' },
   { id: 'email', label: 'Email', type: 'email', placeholder: 'you@email.com', autoComplete: 'email' },
-  { id: 'university', label: 'University', type: 'text', placeholder: 'e.g. University of Lagos', autoComplete: 'organization' },
+  { id: 'university', label: 'University', type: 'text', placeholder: 'e.g. Obafemi Awolowo University', autoComplete: 'organization' },
 ] as const;
 
 export default function WaitlistForm() {
@@ -43,19 +44,23 @@ export default function WaitlistForm() {
       </div>
 
       {fields.map((f, i) => (
-        <div key={f.id} className="hero-fade" style={{ animationDelay: `${320 + i * 70}ms` }}>
+        <div key={f.id} className={`hero-fade ${f.id === 'university' ? 'relative z-20' : ''}`} style={{ animationDelay: `${320 + i * 70}ms` }}>
           <label htmlFor={f.id} className="field-label">
             {f.label}
           </label>
-          <input
-            id={f.id}
-            name={f.id}
-            type={f.type}
-            required
-            placeholder={f.placeholder}
-            autoComplete={f.autoComplete}
-            className="field"
-          />
+          {f.id === 'university' ? (
+            <UniversityInput id={f.id} name={f.id} />
+          ) : (
+            <input
+              id={f.id}
+              name={f.id}
+              type={f.type}
+              required
+              placeholder={f.placeholder}
+              autoComplete={f.autoComplete}
+              className="field"
+            />
+          )}
         </div>
       ))}
 

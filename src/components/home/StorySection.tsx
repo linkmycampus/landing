@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
-import studentsWalking from '../../assets/photos/students-walking.jpg';
-import libraryStudy from '../../assets/photos/library-study.jpg';
-import campusCheer from '../../assets/photos/campus-cheer.jpg';
-import graduationCaps from '../../assets/photos/graduation-caps.jpg';
+import buildingDusk from '../../assets/photos/building-dusk.jpg';
+import buildingNight from '../../assets/photos/building-night.jpg';
+import graduationCrowd from '../../assets/photos/graduation-crowd.jpg';
+import graduatesHall from '../../assets/photos/graduates-hall.jpg';
 
 /*
   "Our story", played like a short film: a campus photo drifts behind the words while the
@@ -17,7 +17,7 @@ type Chapter = { title: string; photo: string; beats: Beat[] };
 const CHAPTERS: Chapter[] = [
   {
     title: 'Planet Campus',
-    photo: studentsWalking,
+    photo: buildingDusk,
     beats: [
       { text: 'Every campus is more than a school.' },
       { text: 'It is a world of its own.' },
@@ -27,7 +27,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     title: 'The problem',
-    photo: libraryStudy,
+    photo: buildingNight,
     beats: [
       { text: 'But campus life is scattered.' },
       { text: 'One event is posted on Instagram.' },
@@ -38,7 +38,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     title: 'Why we exist',
-    photo: campusCheer,
+    photo: graduationCrowd,
     beats: [
       { text: 'You shouldn’t have to know the right people to experience campus.' },
       { text: 'Or be in ten WhatsApp groups to know what’s happening.' },
@@ -48,7 +48,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     title: 'Live more',
-    photo: graduationCaps,
+    photo: graduatesHall,
     beats: [
       { text: 'University isn’t just the classes you attend.' },
       { text: 'It’s the people you meet, and the stories you eventually tell.' },

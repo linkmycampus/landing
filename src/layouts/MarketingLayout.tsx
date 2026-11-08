@@ -7,7 +7,6 @@ import { applyPageMeta } from '../config/seo';
 
 const navLinks = [
   { label: 'Our story', to: '/#story' },
-  { label: 'The app', to: '/#app' },
   { label: 'Features', to: '/#features' },
   { label: 'Campus', to: '/#moments' },
   { label: 'Creators', to: '/#creators' },

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MarketingLayout from './layouts/MarketingLayout';
 import HomePage from './pages/HomePage';
 import WaitlistPage from './pages/WaitlistPage';
-import AmbassadorPage from './pages/AmbassadorPage';
+import { AmbassadorRoute, PartnersHub, ProgramRoute } from './pages/PartnerPage';
 import AboutPage from './pages/AboutPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
@@ -17,7 +17,9 @@ function App() {
         <Route element={<MarketingLayout />}>
           <Route index element={<HomePage />} />
           <Route path="waitlist" element={<WaitlistPage />} />
-          <Route path="ambassador" element={<AmbassadorPage />} />
+          <Route path="ambassador" element={<AmbassadorRoute />} />
+          <Route path="partners" element={<PartnersHub />} />
+          <Route path="partners/:slug" element={<ProgramRoute />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="privacy" element={<PrivacyPage />} />
           <Route path="terms" element={<TermsPage />} />

@@ -11,6 +11,7 @@ const columns = [
       { label: 'Features', to: '/#features' },
       { label: 'Creators', to: '/#creators' },
       { label: 'Ambassadors', to: '/ambassador' },
+      { label: 'Partners', to: '/partners' },
       { label: 'Waitlist', to: '/waitlist' },
     ],
   },
@@ -77,9 +78,20 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-14 text-[13px] text-muted">
-          © {new Date().getFullYear()} LinkMyCampus. All rights reserved.
-        </p>
+        <div className="mt-14 flex flex-col gap-2 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} LinkMyCampus. All rights reserved.</p>
+          <p>
+            A product of{' '}
+            <a
+              href="https://www.pracadtechnologies.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand"
+            >
+              PRACAD Technologies
+            </a>
+          </p>
+        </div>
       </div>
 
       {/* Oversized wordmark, fading out and cut by the page edge */}

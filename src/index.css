@@ -799,3 +799,21 @@
   50% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
 }
 @media (prefers-reduced-motion: reduce) { .sound-pulse { animation: none; } }
+
+/* Partner flow: cards slide in one after another */
+.stagger-in { animation: stagger-in 520ms var(--ease-out) both; }
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Partner flow: confetti dots burst out of the success tick */
+.confetti { animation: confetti 900ms var(--ease-out) both; }
+@keyframes confetti {
+  0% { opacity: 0; transform: rotate(var(--a)) translateX(0) scale(0.4); }
+  40% { opacity: 1; }
+  100% { opacity: 0.9; transform: rotate(var(--a)) translateX(54px) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stagger-in, .confetti { animation: none; }
+}

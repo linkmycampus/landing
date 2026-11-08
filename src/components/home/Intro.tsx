@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import lectureListening from '../../assets/photos/lecture-listening.jpg';
-import studentLaptop from '../../assets/photos/student-laptop.jpg';
-import studentsCorridor from '../../assets/photos/students-corridor.jpg';
-import studentVolunteers from '../../assets/photos/student-volunteers.jpg';
+import oauGate from '../../assets/photos/oau-gate.jpg';
+import oauMonument from '../../assets/photos/oau-monument.jpg';
+import friendsAmphitheatre from '../../assets/photos/friends-amphitheatre.jpg';
+import concertCrowd from '../../assets/photos/concert-crowd.jpg';
 import { CountUp, Reveal } from './primitives';
 
 /* Option 4 — photo cards: each number in white over a softly darkened campus photo. */
 const stats = [
-  { n: '328', label: 'Universities', src: lectureListening },
-  { n: '203', label: 'Polytechnics', src: studentLaptop },
-  { n: '355', label: 'Colleges', src: studentsCorridor },
-  { n: '2.5M+', label: 'Students in Nigeria', src: studentVolunteers },
+  { n: '328', label: 'Universities', src: oauGate },
+  { n: '203', label: 'Polytechnics', src: oauMonument },
+  { n: '355', label: 'Colleges', src: friendsAmphitheatre },
+  { n: '2.5M+', label: 'Students in Nigeria', src: concertCrowd },
 ];
 
 export default function Intro() {

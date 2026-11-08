@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Calendar, MessageCircle, PenSquare, Users, Newspaper } from 'lucide-react';
 import { images } from '../../assets/images';
+import { BRAND_ICON } from '../../config/iconColors';
 
 /*
   "Your school, in your pocket." — one large app screen in the centre, features placed on both
@@ -73,8 +74,9 @@ export default function Showcase() {
       >
         <span
           className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-            on ? 'bg-brand text-white' : 'bg-white text-brand shadow-[var(--knob)]'
+            ''
           }`}
+          style={{ color: on ? 'var(--label)' : BRAND_ICON.fg }}
         >
           <Icon size={19} strokeWidth={1.8} />
         </span>
@@ -130,10 +132,6 @@ export default function Showcase() {
 
           {/* The screen */}
           <div className="relative mx-auto w-[min(74vw,300px)] lg:w-[min(320px,calc(78vh/2.474))]">
-            <div
-              className="pointer-events-none absolute -inset-[30%] rounded-full bg-[radial-gradient(closest-side,rgba(107,79,216,0.32),transparent)] blur-2xl"
-              aria-hidden
-            />
             <div
               className="relative overflow-hidden rounded-[34px] bg-white shadow-[0_50px_100px_-35px_rgba(30,12,80,0.5),0_0_0_1px_rgba(0,0,0,0.06)] transition-[padding-top] duration-700 ease-[var(--ease-out)]"
               style={{ paddingTop: `${FEATURES[active].ratio * 100}%` }}
